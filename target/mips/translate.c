@@ -11816,6 +11816,7 @@ static int decode_extended_mips16_opc (CPUMIPSState *env, DisasContext *ctx)
                     tcg_gen_movcond_tl(TCG_COND_EQ, cpu_gpr[rx], cpu_gpr[24], t0, cpu_gpr[rb], cpu_gpr[rx]);
                 }
                 tcg_temp_free(t0);
+		}
                 break;
             default:
                 LOG_DISAS("SHIFT 5/%d: unimplemented\n", ctx->opcode & 0x3);
