@@ -291,7 +291,7 @@ void afl_firmwire_setup() {
   env = getenv("AFL_INPUT_REPLAY_FILE");
 
   if (env) {
-    aflFile = malloc(strlen(env)+1);
+    aflReplayFile = malloc(strlen(env)+1);
     strcpy((char *)aflReplayFile, env);
   }
 
