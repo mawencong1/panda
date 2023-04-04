@@ -2725,7 +2725,10 @@ static gint machine_class_cmp(gconstpointer a, gconstpointer b)
 {
     MachineClass *mc = NULL;
     GSList *el, *machines = object_class_get_list(TYPE_MACHINE, false);
-
+    #ifdef(TARGET_AARCH64) 
+        printf("TARGET_AARCH64\n");
+	#endif
+    printf("hello world!\n");
      printf("Supported machines are:\n");
         machines = g_slist_sort(machines, machine_class_cmp);
         for (el = machines; el; el = el->next) {
@@ -2736,6 +2739,7 @@ static gint machine_class_cmp(gconstpointer a, gconstpointer b)
             printf("%-20s %s%s\n", mc->name, mc->desc,
                    mc->is_default ? " (default)" : "");
     }
+
     printf("Current name are:%s\n", name);
 
     if (name) {
