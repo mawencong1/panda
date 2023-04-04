@@ -31,12 +31,17 @@
 #include "hw/boards.h"
 
 //plattform specific imports
-#if defined(TARGET_ARM)
+#if defined(TARGET_ARM) && !defined(TARGET_AARCH64)
 #include "target/arm/cpu.h"
 #include "hw/arm/arm.h"
 #include "hw/avatar/arm_helper.h"
-#include "hw/cpu/a9mpcore.h"
 typedef ARMCPU THISCPU;
+
+#elif defined(TARGET_AARCH64)
+#include "target/arm/cpu.h"
+#include "target/arm/cpu64.h"
+#include "hw/arm/arm.h"
+#include "hw/avatar/arm_helper.h"
 
 #elif defined(TARGET_I386) || defined(TARGET_X86_64)
 #include "hw/i386/pc.h"
