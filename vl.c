@@ -2726,6 +2726,18 @@ static gint machine_class_cmp(gconstpointer a, gconstpointer b)
     MachineClass *mc = NULL;
     GSList *el, *machines = object_class_get_list(TYPE_MACHINE, false);
 
+    printf("Supported machines are:\n");
+        machines = g_slist_sort(machines, machine_class_cmp);
+        for (el = machines; el; el = el->next) {
+            MachineClass *mc = el->data;
+            if (mc->alias) {
+                printf("%-20s %s (alias of %s)\n", mc->alias, mc->desc, mc->name);
+            }
+            printf("%-20s %s%s\n", mc->name, mc->desc,
+                   mc->is_default ? " (default)" : "");
+    }
+    printf("Current name are:%s\n", name);
+
     if (name) {
         mc = find_machine(name);
     }
@@ -2733,22 +2745,22 @@ static gint machine_class_cmp(gconstpointer a, gconstpointer b)
         g_slist_free(machines);
         return mc;
     }
-//     if (name && !is_help_option(name)) {
-//         error_report("unsupported machine type");
-//         error_printf("Use -machine help to list supported machines\n");
-//     } else {
-//         printf("Supported machines are:\n");
-//         machines = g_slist_sort(machines, machine_class_cmp);
-//         for (el = machines; el; el = el->next) {
-//             MachineClass *mc = el->data;
-//             if (mc->alias) {
-//                 printf("%-20s %s (alias of %s)\n", mc->alias, mc->desc, mc->name);
-//             }
-//             printf("%-20s %s%s\n", mc->name, mc->desc,
-//                    mc->is_default ? " (default)" : "");
-//         }
-//     }
-	 printf("Supported machines are:\n");
+    // if (name && !is_help_option(name)) {
+    //     error_report("unsupported machine type");
+    //     error_printf("Use -machine help to list supported machines\n");
+    // } else {
+    //     printf("Supported machines are:\n");
+    //     machines = g_slist_sort(machines, machine_class_cmp);
+    //     for (el = machines; el; el = el->next) {
+    //         MachineClass *mc = el->data;
+    //         if (mc->alias) {
+    //             printf("%-20s %s (alias of %s)\n", mc->alias, mc->desc, mc->name);
+    //         }
+    //         printf("%-20s %s%s\n", mc->name, mc->desc,
+    //                mc->is_default ? " (default)" : "");
+    //     }
+    // }
+    printf("Supported machines are:\n");
         machines = g_slist_sort(machines, machine_class_cmp);
         for (el = machines; el; el = el->next) {
             MachineClass *mc = el->data;
@@ -2758,8 +2770,7 @@ static gint machine_class_cmp(gconstpointer a, gconstpointer b)
             printf("%-20s %s%s\n", mc->name, mc->desc,
                    mc->is_default ? " (default)" : "");
         }
-    	error_report("unsupported machine type");
-        error_printf("Use -machine help to list supported machines\n");
+
 
     g_slist_free(machines);
     exit(!name || !is_help_option(name));
