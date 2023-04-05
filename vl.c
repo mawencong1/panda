@@ -2729,7 +2729,7 @@ static gint machine_class_cmp(gconstpointer a, gconstpointer b)
         printf("TARGET_AARCH64\n");
 	#endif
     printf("hello world!\n");
-     printf("Supported machines are:\n");
+     printf("Supported machines are!!:\n");
         machines = g_slist_sort(machines, machine_class_cmp);
         for (el = machines; el; el = el->next) {
             MachineClass *mc = el->data;
@@ -2740,7 +2740,7 @@ static gint machine_class_cmp(gconstpointer a, gconstpointer b)
                    mc->is_default ? " (default)" : "");
     }
 
-    printf("Current name are:%s\n", name);
+    printf("Current name are!!:%s\n", name);
 
     if (name) {
         mc = find_machine(name);
