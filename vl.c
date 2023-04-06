@@ -2725,7 +2725,7 @@ static gint machine_class_cmp(gconstpointer a, gconstpointer b)
 {
     MachineClass *mc = NULL;
     GSList *el, *machines = object_class_get_list(TYPE_MACHINE, false);
-    #ifdef(TARGET_AARCH64) 
+    #ifdef TARGET_AARCH64
         printf("TARGET_AARCH64\n");
 	#endif
     printf("hello world!\n");
