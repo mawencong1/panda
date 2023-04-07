@@ -72,9 +72,9 @@ static inline bool regime_using_lpae_format(CPUARMState *env,
 
 
 // ARM: stolen get_level1_table_address ()
-// from target-arm/helper.c
-bool arm_get_vaddr_table(CPUState *cpu, uint32_t *table, uint32_t address);
-bool arm_get_vaddr_table(CPUState *cpu, uint32_t *table, uint32_t address)
+// from target-arm/helper.c - changed to target_ulong for aarch64
+bool arm_get_vaddr_table(CPUState *cpu, target_ulong *table, target_ulong address);
+bool arm_get_vaddr_table(CPUState *cpu, target_ulong *table, target_ulong address)
 {
     CPUARMState *env = (CPUARMState *)cpu->env_ptr;
     ARMMMUIdx mmu_idx = cpu_mmu_index(env, false);
