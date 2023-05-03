@@ -4479,7 +4479,7 @@ int main_aux(int argc, char **argv, char **envp, PandaMainMode pmm)
 
     smp_parse(qemu_opts_find(qemu_find_opts("smp-opts"), NULL));
 
-    machine_class->max_cpus = machine_class->max_cpus ?: 1; /* Default to UP */
+    machine_class->max_cpus = machine_class->max_cpus ?: 4; /* Default to UP */
     if (max_cpus > machine_class->max_cpus) {
         error_report("Number of SMP CPUs requested (%d) exceeds max CPUs "
                      "supported by machine '%s' (%d)", max_cpus,
