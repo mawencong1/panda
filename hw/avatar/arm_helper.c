@@ -134,7 +134,7 @@ void avatar_add_banked_registers(ARMCPU *cpu){
 /*  This function gets the currently known PC of CPU 0. Will probably need
  *  rework once we support multiprocessing */
 uint64_t get_current_pc(void){
-    ARMCPU *cpu = ARM_CPU(qemu_get_cpu(1));
+    ARMCPU *cpu = ARM_CPU(qemu_get_cpu(0));
     return cpu->env.regs[15];
 }
 
