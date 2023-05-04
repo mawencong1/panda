@@ -586,7 +586,7 @@ int kvm_arch_irqchip_create(MachineState *ms, KVMState *s)
 {
      if (machine_kernel_irqchip_split(ms)) {
          perror("-machine kernel_irqchip=split is not supported on ARM.");
-         exit(1);
+     printf("program exit!\n");exit(1);
     }
 
     /* If we can create the VGIC using the newer device control API, we

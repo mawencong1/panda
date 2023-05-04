@@ -75,7 +75,7 @@ static QOSState *pci_test_start(void)
         qs = qtest_spapr_boot(cmd, tmp_path, PCI_SLOT, PCI_FN);
     } else {
         g_printerr("virtio-blk tests are only available on x86 or ppc64\n");
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
     unlink(tmp_path);
     g_free(tmp_path);

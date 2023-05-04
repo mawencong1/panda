@@ -346,7 +346,7 @@ static void process_incoming_migration_bh(void *opaque)
                           MIGRATION_STATUS_FAILED);
         error_report_err(local_err);
         migrate_decompress_threads_join();
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 
     /* If we get an error here, just don't restart the VM yet. */
@@ -444,7 +444,7 @@ static void process_incoming_migration_co(void *opaque)
                           MIGRATION_STATUS_FAILED);
         error_report("load of migration failed: %s", strerror(-ret));
         migrate_decompress_threads_join();
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 
     mis->bh = qemu_bh_new(process_incoming_migration_bh, mis);

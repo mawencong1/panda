@@ -250,7 +250,7 @@ void drive_check_orphaned(void)
     }
 
     if (orphans) {
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 }
 

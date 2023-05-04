@@ -156,7 +156,7 @@ void HELPER(simcall)(CPUXtensaState *env)
     switch (regs[2]) {
     case TARGET_SYS_exit:
         qemu_log("exit(%d) simcall\n", regs[3]);
-        exit(regs[3]);
+    printf("program exit!\n");exit(regs[3]);
         break;
 
     case TARGET_SYS_read:

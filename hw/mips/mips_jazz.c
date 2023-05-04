@@ -154,7 +154,7 @@ static void mips_jazz_init(MachineState *machine,
     cpu = cpu_mips_init(cpu_model);
     if (cpu == NULL) {
         fprintf(stderr, "Unable to find CPU definition\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     env = &cpu->env;
     qemu_register_reset(main_cpu_reset, cpu);
@@ -197,7 +197,7 @@ static void mips_jazz_init(MachineState *machine,
     }
     if ((bios_size < 0 || bios_size > MAGNUM_BIOS_SIZE) && !qtest_enabled()) {
         error_report("Could not load MIPS bios '%s'", bios_name);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     /* Init CPU internal devices */
@@ -278,10 +278,10 @@ static void mips_jazz_init(MachineState *machine,
             break;
         } else if (is_help_option(nd->model)) {
             fprintf(stderr, "qemu: Supported NICs: dp83932\n");
-            exit(1);
+        printf("program exit!\n");exit(1);
         } else {
             fprintf(stderr, "qemu: Unsupported NIC: %s\n", nd->model);
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     }
 

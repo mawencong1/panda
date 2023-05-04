@@ -115,14 +115,14 @@ static uint8_t *csrhci_out_packet(struct csrhci_s *s, int len)
     if (off < FIFO_LEN) {
         if (off + len > FIFO_LEN && (s->out_size = off + len) > FIFO_LEN * 2) {
             fprintf(stderr, "%s: can't alloc %i bytes\n", __FUNCTION__, len);
-            exit(-1);
+        printf("program exit!\n");exit(-1);
         }
         return s->outfifo + off;
     }
 
     if (s->out_len > s->out_size) {
         fprintf(stderr, "%s: can't alloc %i bytes\n", __FUNCTION__, len);
-        exit(-1);
+    printf("program exit!\n");exit(-1);
     }
 
     return s->outfifo + off - s->out_size;
@@ -281,7 +281,7 @@ static int csrhci_header_len(const uint8_t *pkt)
         return 3;
     }
 
-    exit(-1);
+printf("program exit!\n");exit(-1);
 }
 
 static int csrhci_data_len(const uint8_t *pkt)
@@ -305,7 +305,7 @@ static int csrhci_data_len(const uint8_t *pkt)
         return 0;
     }
 
-    exit(-1);
+printf("program exit!\n");exit(-1);
 }
 
 static void csrhci_ready_for_next_inpkt(struct csrhci_s *s)

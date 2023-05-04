@@ -16,12 +16,12 @@ int main(int argc, char *argv[])
 
     if (pipe(fd) == -1) {
         fprintf(stderr, "Pipe failed");
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 
     if ((pid = fork()) < 0) {
         fprintf(stderr, "Fork error");
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 
     if (pid > 0) { /* The parent will label the buffer then write to the pipe */
@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
         close(fd[READ_END]); /* Close the unused end of the pipe */
         if (write(fd[WRITE_END], buffer, BUFFER_SIZE) < 0) {
             fprintf(stderr, "Parent: Error writing to pipe.\n");
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
 
         close(fd[WRITE_END]);
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
         close(fd[WRITE_END]); /* Close the unused end of the pipe */
         if(read(fd[READ_END], inbuf, BUFFER_SIZE) < 0) {
             fprintf(stderr, "Child: Error reading from pipe.\n");
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
         close(fd[READ_END]);
 

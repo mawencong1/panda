@@ -138,7 +138,7 @@ static void parse_args(int argc, char *argv[])
         switch (c) {
         case 'h':
             usage_complete(argv);
-            exit(0);
+        printf("program exit!\n");exit(0);
         case 'd':
             duration = atoi(optarg);
             break;

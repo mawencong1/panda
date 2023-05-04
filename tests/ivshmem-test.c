@@ -129,7 +129,7 @@ static void setup_vm_cmd(IVState *s, const char *cmd, bool msix)
         s->qs = qtest_spapr_boot(cmd);
     } else {
         g_printerr("ivshmem-test tests are only available on x86 or ppc64\n");
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
     s->dev = get_device(s->qs->pcibus);
 

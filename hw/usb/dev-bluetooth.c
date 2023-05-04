@@ -275,13 +275,13 @@ static void usb_bt_fifo_enqueue(struct usb_hci_in_fifo_s *fifo,
         if (off + len > DFIFO_LEN_MASK + 1 &&
                         (fifo->dsize = off + len) > (DFIFO_LEN_MASK + 1) * 2) {
             fprintf(stderr, "%s: can't alloc %i bytes\n", __FUNCTION__, len);
-            exit(-1);
+        printf("program exit!\n");exit(-1);
         }
         buf = fifo->data + off;
     } else {
         if (fifo->dlen > fifo->dsize) {
             fprintf(stderr, "%s: can't alloc %i bytes\n", __FUNCTION__, len);
-            exit(-1);
+        printf("program exit!\n");exit(-1);
         }
         buf = fifo->data + off - fifo->dsize;
     }

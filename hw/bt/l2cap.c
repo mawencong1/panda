@@ -1131,7 +1131,7 @@ static uint8_t *l2cap_bframe_out(struct bt_l2cap_conn_params_s *parm, int len)
         fprintf(stderr, "%s: B-Frame for CID %04x longer than %i octets.\n",
                         __FUNCTION__,
                         chan->remote_cid, chan->params.remote_mtu);
-        exit(-1);
+    printf("program exit!\n");exit(-1);
     }
 
     return l2cap_pdu_out(chan->l2cap, chan->remote_cid, len);
@@ -1355,7 +1355,7 @@ void bt_l2cap_psm_register(struct bt_l2cap_device_s *dev, int psm, int min_mtu,
     if (new_psm) {
         fprintf(stderr, "%s: PSM %04x already registered for device `%s'.\n",
                         __FUNCTION__, psm, dev->device.lmp_name);
-        exit(-1);
+    printf("program exit!\n");exit(-1);
     }
 
     new_psm = g_malloc0(sizeof(*new_psm));

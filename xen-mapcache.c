@@ -167,7 +167,7 @@ static void xen_remap_bucket(MapCacheEntry *entry,
         ram_block_notify_remove(entry->vaddr_base, entry->size);
         if (munmap(entry->vaddr_base, entry->size) != 0) {
             perror("unmap fails");
-            exit(-1);
+        printf("program exit!\n");exit(-1);
         }
     }
     g_free(entry->valid_mapping);
@@ -181,7 +181,7 @@ static void xen_remap_bucket(MapCacheEntry *entry,
                                       nb_pfn, pfns, err);
     if (vaddr_base == NULL) {
         perror("xenforeignmemory_map");
-        exit(-1);
+    printf("program exit!\n");exit(-1);
     }
 
     entry->vaddr_base = vaddr_base;
@@ -404,7 +404,7 @@ static void xen_invalidate_map_cache_entry_unlocked(uint8_t *buffer)
     ram_block_notify_remove(entry->vaddr_base, entry->size);
     if (munmap(entry->vaddr_base, entry->size) != 0) {
         perror("unmap fails");
-        exit(-1);
+    printf("program exit!\n");exit(-1);
     }
     g_free(entry->valid_mapping);
     g_free(entry);
@@ -448,7 +448,7 @@ void xen_invalidate_map_cache(void)
 
         if (munmap(entry->vaddr_base, entry->size) != 0) {
             perror("unmap fails");
-            exit(-1);
+        printf("program exit!\n");exit(-1);
         }
 
         entry->paddr_index = 0;

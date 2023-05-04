@@ -383,7 +383,7 @@ static void ppc_powernv_init(MachineState *machine)
     fw_size = load_image_targphys(fw_filename, FW_LOAD_ADDR, FW_MAX_SIZE);
     if (fw_size < 0) {
         error_report("Could not load OPAL '%s'", fw_filename);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     g_free(fw_filename);
 
@@ -396,7 +396,7 @@ static void ppc_powernv_init(MachineState *machine)
         if (kernel_size < 0) {
             error_report("Could not load kernel '%s'",
                          machine->kernel_filename);
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     }
 
@@ -408,7 +408,7 @@ static void ppc_powernv_init(MachineState *machine)
         if (pnv->initrd_size < 0) {
             error_report("Could not load initial ram disk '%s'",
                          machine->initrd_filename);
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     }
 
@@ -422,7 +422,7 @@ static void ppc_powernv_init(MachineState *machine)
     if (!object_class_by_name(chip_typename)) {
         error_report("qemu: invalid CPU model '%s' for %s machine",
                      machine->cpu_model, MACHINE_GET_CLASS(machine)->name);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     pnv->chips = g_new0(PnvChip *, pnv->num_chips);

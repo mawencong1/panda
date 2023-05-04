@@ -210,7 +210,7 @@ static void sysbus_device_create_devtree(SysBusDevice *sbdev, void *opaque)
     if (!matched) {
         error_report("Device %s is not supported by this machine yet.",
                      qdev_fw_name(DEVICE(sbdev)));
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 }
 
@@ -758,7 +758,7 @@ static qemu_irq *ppce500_init_mpic(MachineState *machine, PPCE500Params *params,
         if (machine_kernel_irqchip_required(machine) && !dev) {
             error_reportf_err(err,
                               "kernel_irqchip requested but unavailable: ");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     }
 
@@ -828,7 +828,7 @@ void ppce500_init(MachineState *machine, PPCE500Params *params)
         cpu = cpu_ppc_init(machine->cpu_model);
         if (cpu == NULL) {
             fprintf(stderr, "Unable to initialize CPU!\n");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
         env = &cpu->env;
         cs = CPU(cpu);
@@ -836,7 +836,7 @@ void ppce500_init(MachineState *machine, PPCE500Params *params)
         if (env->mmu_model != POWERPC_MMU_BOOKE206) {
             fprintf(stderr, "MMU model %i not supported by this machine.\n",
                 env->mmu_model);
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
 
         if (!firstenv) {
@@ -982,7 +982,7 @@ void ppce500_init(MachineState *machine, PPCE500Params *params)
         if (kernel_size < 0) {
             fprintf(stderr, "qemu: could not load kernel '%s'\n",
                     machine->kernel_filename);
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
 
         cur_base += kernel_size;
@@ -997,7 +997,7 @@ void ppce500_init(MachineState *machine, PPCE500Params *params)
         if (initrd_size < 0) {
             fprintf(stderr, "qemu: could not load initial ram disk '%s'\n",
                     machine->initrd_filename);
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
 
         cur_base = initrd_base + initrd_size;
@@ -1038,7 +1038,7 @@ void ppce500_init(MachineState *machine, PPCE500Params *params)
                                   NULL, NULL);
         if (kernel_size < 0) {
             fprintf(stderr, "qemu: could not load firmware '%s'\n", filename);
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     }
     g_free(filename);
@@ -1051,7 +1051,7 @@ void ppce500_init(MachineState *machine, PPCE500Params *params)
                                        kernel_base, kernel_size);
     if (dt_size < 0) {
         fprintf(stderr, "couldn't load device tree\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     assert(dt_size < DTB_MAX_SIZE);
 

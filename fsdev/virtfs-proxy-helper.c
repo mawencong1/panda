@@ -1077,7 +1077,7 @@ int main(int argc, char **argv)
         case 'h':
         default:
             usage(argv[0]);
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
     }
 
@@ -1091,7 +1091,7 @@ int main(int argc, char **argv)
     if (sock_name && sock != -1) {
         fprintf(stderr, "both named socket and socket descriptor specified\n");
         usage(argv[0]);
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 
     if (sock_name && (own_u == -1 || own_g == -1)) {
@@ -1099,24 +1099,24 @@ int main(int argc, char **argv)
         fprintf(stderr,
                 "owner uid:gid specifies who can access the socket file\n");
         usage(argv[0]);
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 
     if (lstat(rpath, &stbuf) < 0) {
         fprintf(stderr, "invalid path \"%s\" specified, %s\n",
                 rpath, strerror(errno));
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 
     if (!S_ISDIR(stbuf.st_mode)) {
         fprintf(stderr, "specified path \"%s\" is not directory\n", rpath);
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 
     if (is_daemon) {
         if (daemon(0, 0) < 0) {
             fprintf(stderr, "daemon call failed\n");
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
         openlog(PROGNAME, LOG_PID, LOG_DAEMON);
     }

@@ -929,13 +929,13 @@ static void inject_vcpu_irq_legacy(CPUState *cs, struct kvm_s390_irq *irq)
     r = s390_kvm_irq_to_interrupt(irq, &kvmint);
     if (r < 0) {
         fprintf(stderr, "%s called with bogus interrupt\n", __func__);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     r = kvm_vcpu_ioctl(cs, KVM_S390_INTERRUPT, &kvmint);
     if (r < 0) {
         fprintf(stderr, "KVM failed to inject interrupt\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 }
 
@@ -950,7 +950,7 @@ void kvm_s390_vcpu_interrupt(S390CPU *cpu, struct kvm_s390_irq *irq)
             return;
         }
         error_report("KVM failed to inject interrupt %llx", irq->type);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     inject_vcpu_irq_legacy(cs, irq);
@@ -964,13 +964,13 @@ static void __kvm_s390_floating_interrupt(struct kvm_s390_irq *irq)
     r = s390_kvm_irq_to_interrupt(irq, &kvmint);
     if (r < 0) {
         fprintf(stderr, "%s called with bogus interrupt\n", __func__);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     r = kvm_vm_ioctl(kvm_state, KVM_S390_INTERRUPT, &kvmint);
     if (r < 0) {
         fprintf(stderr, "KVM failed to inject interrupt\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 }
 
@@ -1960,15 +1960,15 @@ static int handle_intercept(S390CPU *cpu)
             break;
         case ICPT_SOFT_INTERCEPT:
             fprintf(stderr, "KVM unimplemented icpt SOFT\n");
-            exit(1);
+        printf("program exit!\n");exit(1);
             break;
         case ICPT_IO:
             fprintf(stderr, "KVM unimplemented icpt IO\n");
-            exit(1);
+        printf("program exit!\n");exit(1);
             break;
         default:
             fprintf(stderr, "Unknown intercept code: %d\n", icpt_code);
-            exit(1);
+        printf("program exit!\n");exit(1);
             break;
     }
 
@@ -2267,7 +2267,7 @@ int kvm_s390_set_cpu_state(S390CPU *cpu, uint8_t cpu_state)
     default:
         error_report("Requested CPU state is not a valid S390 CPU state: %u",
                      cpu_state);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     ret = kvm_vcpu_ioctl(CPU(cpu), KVM_SET_MP_STATE, &mp_state);

@@ -128,7 +128,7 @@ bool lm32_cpu_do_semihosting(CPUState *cs)
     switch (nr) {
     case TARGET_SYS_exit:
         /* void _exit(int rc) */
-        exit(arg0);
+    printf("program exit!\n");exit(arg0);
 
     case TARGET_SYS_open:
         /* int open(const char *pathname, int flags) */

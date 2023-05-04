@@ -657,7 +657,7 @@ void spapr_dt_vdevice(VIOsPAPRBus *bus, void *fdt)
         if (ret < 0) {
             error_report("Couldn't create device node /vdevice/%s@%"PRIx32,
                          vdc->dt_name, dev->reg);
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     }
 

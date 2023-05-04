@@ -6807,7 +6807,7 @@ void syscall_init(void)
             if (arg_type[0] != TYPE_PTR) {
                 fprintf(stderr, "cannot patch size for ioctl 0x%x\n",
                         ie->target_cmd);
-                exit(1);
+            printf("program exit!\n");exit(1);
             }
             arg_type++;
             size = thunk_type_size(arg_type, 0);

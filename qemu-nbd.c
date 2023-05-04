@@ -179,7 +179,7 @@ static int find_partition(BlockBackend *blk, int partition,
     ret = blk_pread(blk, 0, data, sizeof(data));
     if (ret < 0) {
         error_report("error while reading: %s", strerror(-ret));
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 
     if (data[510] != 0x55 || data[511] != 0xaa) {
@@ -202,7 +202,7 @@ static int find_partition(BlockBackend *blk, int partition,
                             data1, sizeof(data1));
             if (ret < 0) {
                 error_report("error while reading: %s", strerror(-ret));
-                exit(EXIT_FAILURE);
+            printf("program exit!\n");exit(EXIT_FAILURE);
             }
 
             for (j = 0; j < 4; j++) {
@@ -604,18 +604,18 @@ int main(int argc, char **argv)
         case QEMU_NBD_OPT_CACHE:
             if (seen_cache) {
                 error_report("-n and --cache can only be specified once");
-                exit(EXIT_FAILURE);
+            printf("program exit!\n");exit(EXIT_FAILURE);
             }
             seen_cache = true;
             if (bdrv_parse_cache_mode(optarg, &flags, &writethrough) == -1) {
                 error_report("Invalid cache mode `%s'", optarg);
-                exit(EXIT_FAILURE);
+            printf("program exit!\n");exit(EXIT_FAILURE);
             }
             break;
         case QEMU_NBD_OPT_AIO:
             if (seen_aio) {
                 error_report("--aio can only be specified once");
-                exit(EXIT_FAILURE);
+            printf("program exit!\n");exit(EXIT_FAILURE);
             }
             seen_aio = true;
             if (!strcmp(optarg, "native")) {
@@ -624,18 +624,18 @@ int main(int argc, char **argv)
                 /* this is the default */
             } else {
                error_report("invalid aio mode `%s'", optarg);
-               exit(EXIT_FAILURE);
+           printf("program exit!\n");exit(EXIT_FAILURE);
             }
             break;
         case QEMU_NBD_OPT_DISCARD:
             if (seen_discard) {
                 error_report("--discard can only be specified once");
-                exit(EXIT_FAILURE);
+            printf("program exit!\n");exit(EXIT_FAILURE);
             }
             seen_discard = true;
             if (bdrv_parse_discard_flags(optarg, &flags) == -1) {
                 error_report("Invalid discard mode `%s'", optarg);
-                exit(EXIT_FAILURE);
+            printf("program exit!\n");exit(EXIT_FAILURE);
             }
             break;
         case QEMU_NBD_OPT_DETECT_ZEROES:
@@ -648,13 +648,13 @@ int main(int argc, char **argv)
             if (local_err) {
                 error_reportf_err(local_err,
                                   "Failed to parse detect_zeroes mode: ");
-                exit(EXIT_FAILURE);
+            printf("program exit!\n");exit(EXIT_FAILURE);
             }
             if (detect_zeroes == BLOCKDEV_DETECT_ZEROES_OPTIONS_UNMAP &&
                 !(flags & BDRV_O_UNMAP)) {
                 error_report("setting detect-zeroes to unmap is not allowed "
                              "without setting discard operation to unmap");
-                exit(EXIT_FAILURE);
+            printf("program exit!\n");exit(EXIT_FAILURE);
             }
             break;
         case 'b':
@@ -667,11 +667,11 @@ int main(int argc, char **argv)
                 dev_offset = strtoll (optarg, &end, 0);
             if (*end) {
                 error_report("Invalid offset `%s'", optarg);
-                exit(EXIT_FAILURE);
+            printf("program exit!\n");exit(EXIT_FAILURE);
             }
             if (dev_offset < 0) {
                 error_report("Offset must be positive `%s'", optarg);
-                exit(EXIT_FAILURE);
+            printf("program exit!\n");exit(EXIT_FAILURE);
             }
             break;
         case 'l':
@@ -681,7 +681,7 @@ int main(int argc, char **argv)
                 if (!sn_opts) {
                     error_report("Failed in parsing snapshot param `%s'",
                                  optarg);
-                    exit(EXIT_FAILURE);
+                printf("program exit!\n");exit(EXIT_FAILURE);
                 }
             } else {
                 sn_id_or_name = optarg;
@@ -695,18 +695,18 @@ int main(int argc, char **argv)
             partition = strtol(optarg, &end, 0);
             if (*end) {
                 error_report("Invalid partition `%s'", optarg);
-                exit(EXIT_FAILURE);
+            printf("program exit!\n");exit(EXIT_FAILURE);
             }
             if (partition < 1 || partition > 8) {
                 error_report("Invalid partition %d", partition);
-                exit(EXIT_FAILURE);
+            printf("program exit!\n");exit(EXIT_FAILURE);
             }
             break;
         case 'k':
             sockpath = optarg;
             if (sockpath[0] != '/') {
                 error_report("socket path must be absolute");
-                exit(EXIT_FAILURE);
+            printf("program exit!\n");exit(EXIT_FAILURE);
             }
             break;
         case 'd':
@@ -719,11 +719,11 @@ int main(int argc, char **argv)
             shared = strtol(optarg, &end, 0);
             if (*end) {
                 error_report("Invalid shared device number '%s'", optarg);
-                exit(EXIT_FAILURE);
+            printf("program exit!\n");exit(EXIT_FAILURE);
             }
             if (shared < 1) {
                 error_report("Shared device number must be greater than 0");
-                exit(EXIT_FAILURE);
+            printf("program exit!\n");exit(EXIT_FAILURE);
             }
             break;
         case 'f':
@@ -743,21 +743,21 @@ int main(int argc, char **argv)
             break;
         case 'V':
             version(argv[0]);
-            exit(0);
+        printf("program exit!\n");exit(0);
             break;
         case 'h':
             usage(argv[0]);
-            exit(0);
+        printf("program exit!\n");exit(0);
             break;
         case '?':
             error_report("Try `%s --help' for more information.", argv[0]);
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         case QEMU_NBD_OPT_OBJECT: {
             QemuOpts *opts;
             opts = qemu_opts_parse_noisily(&qemu_object_opts,
                                            optarg, true);
             if (!opts) {
-                exit(EXIT_FAILURE);
+            printf("program exit!\n");exit(EXIT_FAILURE);
             }
         }   break;
         case QEMU_NBD_OPT_TLSCREDS:
@@ -779,17 +779,17 @@ int main(int argc, char **argv)
     if ((argc - optind) != 1) {
         error_report("Invalid number of arguments");
         error_printf("Try `%s --help' for more information.\n", argv[0]);
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 
     if (qemu_opts_foreach(&qemu_object_opts,
                           user_creatable_add_opts_foreach,
                           NULL, NULL)) {
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 
     if (!trace_init_backends()) {
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     trace_init_file(trace_file);
     qemu_set_log(LOG_TRACE);
@@ -803,25 +803,25 @@ int main(int argc, char **argv)
                                                               bindto, port);
         if (err_msg != NULL) {
             error_report("%s", err_msg);
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
 
         /* qemu-nbd can only listen on a single socket.  */
         if (socket_activation > 1) {
             error_report("qemu-nbd does not support socket activation with %s > 1",
                          "LISTEN_FDS");
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
     }
 
     if (tlscredsid) {
         if (sockpath) {
             error_report("TLS is only supported with IPv4/IPv6");
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
         if (device) {
             error_report("TLS is not supported with a host device");
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
         if (!export_name) {
             /* Set the default NBD protocol export name, since
@@ -832,7 +832,7 @@ int main(int argc, char **argv)
         if (local_err) {
             error_report("Failed to get TLS creds %s",
                          error_get_pretty(local_err));
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
     }
 
@@ -841,7 +841,7 @@ int main(int argc, char **argv)
         if (nbdfd < 0) {
             error_report("Cannot open %s: %s", argv[optind],
                          strerror(errno));
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
         nbd_disconnect(nbdfd);
 
@@ -860,7 +860,7 @@ int main(int argc, char **argv)
         if (qemu_pipe(stderr_fd) < 0) {
             error_report("Error setting up communication pipe: %s",
                          strerror(errno));
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
 
         /* Now daemonize, but keep a communication channel open to
@@ -869,7 +869,7 @@ int main(int argc, char **argv)
         pid = fork();
         if (pid < 0) {
             error_report("Failed to fork: %s", strerror(errno));
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         } else if (pid == 0) {
             close(stderr_fd[0]);
             ret = qemu_daemon(1, 0);
@@ -879,7 +879,7 @@ int main(int argc, char **argv)
             dup2(stderr_fd[1], STDERR_FILENO);
             if (ret < 0) {
                 error_report("Failed to daemonize: %s", strerror(errno));
-                exit(EXIT_FAILURE);
+            printf("program exit!\n");exit(EXIT_FAILURE);
             }
 
             /* ... close the descriptor we inherited and go on.  */
@@ -897,19 +897,19 @@ int main(int argc, char **argv)
                 errors = true;
                 ret = qemu_write_full(STDERR_FILENO, buf, ret);
                 if (ret < 0) {
-                    exit(EXIT_FAILURE);
+                printf("program exit!\n");exit(EXIT_FAILURE);
                 }
             }
             if (ret < 0) {
                 error_report("Cannot read from daemon: %s",
                              strerror(errno));
-                exit(EXIT_FAILURE);
+            printf("program exit!\n");exit(EXIT_FAILURE);
             }
 
             /* Usually the daemon should not print any message.
              * Exit with zero status in that case.
              */
-            exit(errors);
+        printf("program exit!\n");exit(errors);
         }
     }
 
@@ -934,13 +934,13 @@ int main(int argc, char **argv)
         if (server_ioc == NULL) {
             error_report("Failed to use socket activation: %s",
                          error_get_pretty(local_err));
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
     }
 
     if (qemu_init_main_loop(&local_err)) {
         error_report_err(local_err);
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
     bdrv_init();
     atexit(bdrv_close_all);
@@ -950,12 +950,12 @@ int main(int argc, char **argv)
         QemuOpts *opts;
         if (fmt) {
             error_report("--image-opts and -f are mutually exclusive");
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
         opts = qemu_opts_parse_noisily(&file_opts, srcpath, true);
         if (!opts) {
             qemu_opts_reset(&file_opts);
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
         options = qemu_opts_to_qdict(opts, NULL);
         qemu_opts_reset(&file_opts);
@@ -971,7 +971,7 @@ int main(int argc, char **argv)
     if (!blk) {
         error_reportf_err(local_err, "Failed to blk_new_open '%s': ",
                           argv[optind]);
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
     bs = blk_bs(blk);
 
@@ -988,7 +988,7 @@ int main(int argc, char **argv)
     }
     if (ret < 0) {
         error_reportf_err(local_err, "Failed to load snapshot: ");
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 
     bs->detect_zeroes = detect_zeroes;
@@ -996,14 +996,14 @@ int main(int argc, char **argv)
     if (fd_size < 0) {
         error_report("Failed to determine the image length: %s",
                      strerror(-fd_size));
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 
     if (dev_offset >= fd_size) {
         error_report("Offset (%lld) has to be smaller than the image size "
                      "(%lld)",
                      (long long int)dev_offset, (long long int)fd_size);
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
     fd_size -= dev_offset;
 
@@ -1012,7 +1012,7 @@ int main(int argc, char **argv)
         if (ret < 0) {
             error_report("Could not find partition %d: %s", partition,
                          strerror(-ret));
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
     }
 
@@ -1020,7 +1020,7 @@ int main(int argc, char **argv)
                          writethrough, NULL, &local_err);
     if (!exp) {
         error_report_err(local_err);
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
     if (export_name) {
         nbd_export_set_name(exp, export_name);
@@ -1028,7 +1028,7 @@ int main(int argc, char **argv)
         newproto = true;
     } else if (export_description) {
         error_report("Export description requires an export name");
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 
     if (device) {
@@ -1037,7 +1037,7 @@ int main(int argc, char **argv)
         ret = pthread_create(&client_thread, NULL, nbd_client_thread, device);
         if (ret != 0) {
             error_report("Failed to create client thread: %s", strerror(ret));
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
     } else {
         /* Shut up GCC warnings.  */
@@ -1051,7 +1051,7 @@ int main(int argc, char **argv)
     if (chdir("/") < 0) {
         error_report("Could not chdir to root directory: %s",
                      strerror(errno));
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 
     if (fork_process) {
@@ -1080,8 +1080,8 @@ int main(int argc, char **argv)
     if (device) {
         void *ret;
         pthread_join(client_thread, &ret);
-        exit(ret != NULL);
+    printf("program exit!\n");exit(ret != NULL);
     } else {
-        exit(EXIT_SUCCESS);
+    printf("program exit!\n");exit(EXIT_SUCCESS);
     }
 }

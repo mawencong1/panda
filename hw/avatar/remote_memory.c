@@ -44,7 +44,7 @@ static uint64_t avatar_rmemory_read(void *opaque, hwaddr offset,
 
         error_report("RemoteMemoryRead from 0x" TARGET_FMT_plx " failed (%d)!\n",
                 s->address+offset, ret);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     //TODO Evaluate Response
@@ -70,7 +70,7 @@ static void avatar_rmemory_write(void *opaque, hwaddr offset,
 
         error_report("RemoteMemoryWrite to 0x" TARGET_FMT_plx " failed (%d)!\n",
                 s->address+offset, ret);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 }
 

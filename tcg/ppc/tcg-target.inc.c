@@ -2860,7 +2860,7 @@ static void __attribute__((constructor)) tcg_cache_init(void)
         if (isize == 0) {
             fprintf(stderr, "getauxval AT_ICACHEBSIZE failed\n");
         }
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     dcache_bsize = dsize;
     icache_bsize = isize;
@@ -2878,7 +2878,7 @@ static void __attribute__((constructor)) tcg_cache_init(void)
     len = sizeof(cacheline);
     if (sysctl(name, 2, &cacheline, &len, NULL, 0)) {
         perror("sysctl CTL_HW HW_CACHELINE failed");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     dcache_bsize = cacheline;
     icache_bsize = cacheline;
@@ -2895,7 +2895,7 @@ static void __attribute__((constructor)) tcg_cache_init(void)
     if (sysctlbyname ("machdep.cacheline_size", &cacheline, &len, NULL, 0)) {
         fprintf(stderr, "sysctlbyname machdep.cacheline_size failed: %s\n",
                 strerror(errno));
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     dcache_bsize = cacheline;
     icache_bsize = cacheline;

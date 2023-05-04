@@ -44,7 +44,7 @@ static QVirtIO9P *qvirtio_9p_start(const char *driver)
         v9p->qs = qtest_spapr_boot(cmd, v9p->test_share, driver, mount_tag);
     } else {
         g_printerr("virtio-9p tests are only available on x86 or ppc64\n");
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 
     return v9p;

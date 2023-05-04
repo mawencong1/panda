@@ -187,7 +187,7 @@ static void create_fdt(VirtMachineState *vms)
 
     if (!fdt) {
         error_report("create_device_tree() failed");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     vms->fdt = fdt;
@@ -841,18 +841,18 @@ static void create_one_flash(const char *name, hwaddr flashbase,
             error_report("The contents of the first flash device may be "
                          "specified with -bios or with -drive if=pflash... "
                          "but you cannot use both options at once");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
         fn = qemu_find_file(QEMU_FILE_TYPE_BIOS, file);
         if (!fn) {
             error_report("Could not find ROM image '%s'", file);
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
         image_size = load_image_mr(fn, sysbus_mmio_get_region(sbd, 0));
         g_free(fn);
         if (image_size < 0) {
             error_report("Could not load ROM image '%s'", file);
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     }
 }
@@ -1222,13 +1222,13 @@ static void machvirt_init(MachineState *machine)
     if (!vms->gic_version) {
         if (!kvm_enabled()) {
             error_report("gic-version=host requires KVM");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
 
         vms->gic_version = kvm_arm_vgic_probe();
         if (!vms->gic_version) {
             error_report("Unable to determine GIC version supported by host");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     }
 
@@ -1237,7 +1237,7 @@ static void machvirt_init(MachineState *machine)
 
     if (!cpuname_valid(cpustr[0])) {
         error_report("mach-virt: CPU %s not supported", cpustr[0]);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     /* If we have an EL3 boot ROM then the assumption is that it will
@@ -1273,26 +1273,26 @@ static void machvirt_init(MachineState *machine)
         error_report("Number of SMP CPUs requested (%d) exceeds max CPUs "
                      "supported by machine 'mach-virt' (%d)",
                      max_cpus, virt_max_cpus);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     vms->smp_cpus = smp_cpus;
 
     if (machine->ram_size > vms->memmap[VIRT_MEM].size) {
         error_report("mach-virt: cannot model more than %dGB RAM", RAMLIMIT_GB);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     if (vms->virt && kvm_enabled()) {
         error_report("mach-virt: KVM does not support providing "
                      "Virtualization extensions to the guest CPU");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     if (vms->secure) {
         if (kvm_enabled()) {
             error_report("mach-virt: KVM does not support Security extensions");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
 
         /* The Secure view of the world is the same as the NonSecure,
@@ -1311,7 +1311,7 @@ static void machvirt_init(MachineState *machine)
     oc = cpu_class_by_name(TYPE_ARM_CPU, cpustr[0]);
     if (!oc) {
         error_report("Unable to find CPU definition");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     typename = object_class_get_name(oc);
 
@@ -1321,7 +1321,7 @@ static void machvirt_init(MachineState *machine)
     g_strfreev(cpustr);
     if (err) {
         error_report_err(err);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     for (n = 0; n < smp_cpus; n++) {

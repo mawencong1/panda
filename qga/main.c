@@ -481,16 +481,16 @@ static void become_daemon(const char *pidfile)
 
     pid = fork();
     if (pid < 0) {
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
     if (pid > 0) {
-        exit(EXIT_SUCCESS);
+    printf("program exit!\n");exit(EXIT_SUCCESS);
     }
 
     if (pidfile) {
         if (!ga_open_pidfile(pidfile)) {
             g_critical("failed to create pidfile");
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
     }
 
@@ -513,7 +513,7 @@ fail:
         unlink(pidfile);
     }
     g_critical("failed to daemonize");
-    exit(EXIT_FAILURE);
+printf("program exit!\n");exit(EXIT_FAILURE);
 #endif
 }
 
@@ -999,7 +999,7 @@ end:
         !(gerr->domain == G_FILE_ERROR && gerr->code == G_FILE_ERROR_NOENT)) {
         g_critical("error loading configuration from path: %s, %s",
                    QGA_CONF_DEFAULT, gerr->message);
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
     g_clear_error(&gerr);
 }
@@ -1117,7 +1117,7 @@ static void config_parse(GAConfig *config, int argc, char **argv)
             break;
         case 'V':
             printf("QEMU Guest Agent %s\n", QEMU_VERSION);
-            exit(EXIT_SUCCESS);
+        printf("program exit!\n");exit(EXIT_SUCCESS);
         case 'd':
             config->daemonize = 1;
             break;
@@ -1127,7 +1127,7 @@ static void config_parse(GAConfig *config, int argc, char **argv)
         case 'b': {
             if (is_help_option(optarg)) {
                 qmp_for_each_command(&ga_commands, ga_print_cmd, NULL);
-                exit(EXIT_SUCCESS);
+            printf("program exit!\n");exit(EXIT_SUCCESS);
             }
             config->blacklist = g_list_concat(config->blacklist,
                                              split_list(optarg, ","));
@@ -1138,37 +1138,37 @@ static void config_parse(GAConfig *config, int argc, char **argv)
             config->service = optarg;
             if (strcmp(config->service, "install") == 0) {
                 if (ga_install_vss_provider()) {
-                    exit(EXIT_FAILURE);
+                printf("program exit!\n");exit(EXIT_FAILURE);
                 }
                 if (ga_install_service(config->channel_path,
                                        config->log_filepath, config->state_dir)) {
-                    exit(EXIT_FAILURE);
+                printf("program exit!\n");exit(EXIT_FAILURE);
                 }
-                exit(EXIT_SUCCESS);
+            printf("program exit!\n");exit(EXIT_SUCCESS);
             } else if (strcmp(config->service, "uninstall") == 0) {
                 ga_uninstall_vss_provider();
-                exit(ga_uninstall_service());
+            printf("program exit!\n");exit(ga_uninstall_service());
             } else if (strcmp(config->service, "vss-install") == 0) {
                 if (ga_install_vss_provider()) {
-                    exit(EXIT_FAILURE);
+                printf("program exit!\n");exit(EXIT_FAILURE);
                 }
-                exit(EXIT_SUCCESS);
+            printf("program exit!\n");exit(EXIT_SUCCESS);
             } else if (strcmp(config->service, "vss-uninstall") == 0) {
                 ga_uninstall_vss_provider();
-                exit(EXIT_SUCCESS);
+            printf("program exit!\n");exit(EXIT_SUCCESS);
             } else {
                 printf("Unknown service command.\n");
-                exit(EXIT_FAILURE);
+            printf("program exit!\n");exit(EXIT_FAILURE);
             }
             break;
 #endif
         case 'h':
             usage(argv[0]);
-            exit(EXIT_SUCCESS);
+        printf("program exit!\n");exit(EXIT_SUCCESS);
         case '?':
             g_print("Unknown option, try '%s --help' for more information.\n",
                     argv[0]);
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
     }
 }

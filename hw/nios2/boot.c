@@ -199,7 +199,7 @@ void nios2_load_kernel(Nios2CPU *cpu, hwaddr ddr_base,
             if (initrd_size < 0) {
                 error_report("qemu: could not load initrd '%s'",
                              initrd_filename);
-                exit(EXIT_FAILURE);
+            printf("program exit!\n");exit(EXIT_FAILURE);
             }
             high += initrd_size;
         }

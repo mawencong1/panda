@@ -1386,13 +1386,13 @@ void ppc_cpu_parse_features(const char *cpu_model)
     model_pieces = g_strsplit(cpu_model, ",", 2);
     if (!model_pieces[0]) {
         error_report("Invalid/empty CPU model name");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     oc = cpu_class_by_name(TYPE_POWERPC_CPU, model_pieces[0]);
     if (oc == NULL) {
         error_report("Unable to find CPU definition: %s", model_pieces[0]);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     typename = object_class_get_name(oc);

@@ -417,7 +417,7 @@ static void ioapic_realize(DeviceState *dev, Error **errp)
     if (s->version != 0x11 && s->version != 0x20) {
         error_report("IOAPIC only supports version 0x11 or 0x20 "
                      "(default: 0x%x).", IOAPIC_VER_DEF);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     memory_region_init_io(&s->io_memory, OBJECT(s), &ioapic_io_ops, s,

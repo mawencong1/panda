@@ -194,7 +194,7 @@ int load_multiboot(FWCfgState *fw_cfg,
 
         if (((struct elf64_hdr*)header)->e_machine == EM_X86_64) {
             fprintf(stderr, "Cannot load x86-64 image, give a 32bit one.\n");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
 
         kernel_size = load_elf(kernel_filename, NULL, NULL, &elf_entry,
@@ -202,7 +202,7 @@ int load_multiboot(FWCfgState *fw_cfg,
                                0, 0);
         if (kernel_size < 0) {
             fprintf(stderr, "Error while loading elf kernel\n");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
         mh_load_addr = elf_low;
         mb_kernel_size = elf_high - elf_low;
@@ -211,7 +211,7 @@ int load_multiboot(FWCfgState *fw_cfg,
         mbs.mb_buf = g_malloc(mb_kernel_size);
         if (rom_copy(mbs.mb_buf, mh_load_addr, mb_kernel_size) != mb_kernel_size) {
             fprintf(stderr, "Error while fetching elf kernel from rom\n");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
 
         mb_debug("qemu: loading multiboot-elf kernel (%#x bytes) with entry %#zx\n",
@@ -251,7 +251,7 @@ int load_multiboot(FWCfgState *fw_cfg,
         fseek(f, mb_kernel_text_offset, SEEK_SET);
         if (fread(mbs.mb_buf, 1, mb_load_size, f) != mb_load_size) {
             fprintf(stderr, "fread() failed\n");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
         memset(mbs.mb_buf + mb_load_size, 0, mb_kernel_size - mb_load_size);
         fclose(f);
@@ -308,7 +308,7 @@ int load_multiboot(FWCfgState *fw_cfg,
             mb_mod_length = get_image_size(tmpbuf);
             if (mb_mod_length < 0) {
                 fprintf(stderr, "Failed to open file '%s'\n", tmpbuf);
-                exit(1);
+            printf("program exit!\n");exit(1);
             }
 
             mbs.mb_buf_size = TARGET_PAGE_ALIGN(mb_mod_length + mbs.mb_buf_size);

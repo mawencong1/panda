@@ -52,7 +52,7 @@ static void GCC_FMT_ATTR(2, 3) blkverify_err(BlkverifyRequest *r,
     vfprintf(stderr, fmt, ap);
     fprintf(stderr, "\n");
     va_end(ap);
-    exit(1);
+printf("program exit!\n");exit(1);
 }
 
 /* Valid blkverify filenames look like blkverify:path/to/raw_image:path/to/image */

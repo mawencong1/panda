@@ -2264,7 +2264,7 @@ struct omap_mpu_state_s *omap2420_mpu_init(MemoryRegion *sysmem,
     s->cpu = cpu_arm_init(core ?: "arm1136-r2");
     if (s->cpu == NULL) {
         fprintf(stderr, "Unable to find CPU definition\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     s->sdram_size = sdram_size;
     s->sram_size = OMAP242X_SRAM_SIZE;
@@ -2467,7 +2467,7 @@ struct omap_mpu_state_s *omap2420_mpu_init(MemoryRegion *sysmem,
     dinfo = drive_get(IF_SD, 0, 0);
     if (!dinfo) {
         fprintf(stderr, "qemu: missing SecureDigital device\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     s->mmc = omap2_mmc_init(omap_l4tao(s->l4, 9),
                     blk_by_legacy_dinfo(dinfo),

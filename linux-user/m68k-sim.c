@@ -97,7 +97,7 @@ void do_m68k_simcall(CPUM68KState *env, int nr)
     args = (uint32_t *)(unsigned long)(env->aregs[7] + 4);
     switch (nr) {
     case SYS_EXIT:
-        exit(ARG(0));
+    printf("program exit!\n");exit(ARG(0));
     case SYS_READ:
         check_err(env, read(ARG(0), (void *)(unsigned long)ARG(1), ARG(2)));
         break;

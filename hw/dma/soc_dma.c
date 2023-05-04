@@ -275,7 +275,7 @@ void soc_dma_port_add_fifo(struct soc_dma_s *soc, hwaddr virt_base,
                                 "-%"PRIx64 "\n", __func__,
                                 virt_base, entry->addr,
                                 (entry->addr + entry->u.mem.size));
-                exit(-1);
+            printf("program exit!\n");exit(-1);
             }
 
             if (entry->addr <= virt_base)
@@ -287,7 +287,7 @@ void soc_dma_port_add_fifo(struct soc_dma_s *soc, hwaddr virt_base,
                     fprintf(stderr, "%s: FIFO at %"PRIx64
                                     " collides FIFO at %"PRIx64 "\n",
                                     __func__, virt_base, entry->addr);
-                    exit(-1);
+                printf("program exit!\n");exit(-1);
                 }
 
                 entry ++;
@@ -326,7 +326,7 @@ void soc_dma_port_add_mem(struct soc_dma_s *soc, uint8_t *phys_base,
                                 "-%"PRIx64 "\n", __func__,
                                 virt_base, virt_base + size,
                                 entry->addr, entry->addr + entry->u.mem.size);
-                exit(-1);
+            printf("program exit!\n");exit(-1);
             }
 
             if (entry->addr <= virt_base)
@@ -339,7 +339,7 @@ void soc_dma_port_add_mem(struct soc_dma_s *soc, uint8_t *phys_base,
                                 "\n", __func__,
                                 virt_base, virt_base + size,
                                 entry->addr);
-                exit(-1);
+            printf("program exit!\n");exit(-1);
             }
 
             while (entry < dma->memmap + dma->memmap_size &&

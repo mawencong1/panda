@@ -595,7 +595,7 @@ struct omap_mmc_s *omap_mmc_init(hwaddr base,
     /* Instantiate the storage */
     s->card = sd_init(blk, false);
     if (s->card == NULL) {
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     return s;
@@ -622,7 +622,7 @@ struct omap_mmc_s *omap2_mmc_init(struct omap_target_agent_s *ta,
     /* Instantiate the storage */
     s->card = sd_init(blk, false);
     if (s->card == NULL) {
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     s->cdet = qemu_allocate_irq(omap_mmc_cover_cb, s, 0);

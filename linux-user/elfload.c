@@ -408,7 +408,7 @@ static int validate_guest_space(unsigned long guest_base,
     /* Now it's populated make it RO */
     if (mprotect((void *)test_page_addr, qemu_host_page_size, PROT_READ)) {
         perror("Protecting guest commpage");
-        exit(-1);
+    printf("program exit!\n");exit(-1);
     }
 
     return 1; /* All good */
@@ -1475,7 +1475,7 @@ static abi_ulong copy_elf_strings(int argc, char **argv, char *scratch,
             tmp = argv[i];
             if (!tmp) {
                 fprintf(stderr, "VFS: argc is wrong");
-                exit(-1);
+            printf("program exit!\n");exit(-1);
             }
             len = strlen(tmp) + 1;
             tmp += len;
@@ -1508,7 +1508,7 @@ static abi_ulong copy_elf_strings(int argc, char **argv, char *scratch,
             tmp = argv[i];
             if (!tmp) {
                 fprintf(stderr, "VFS: argc is wrong");
-                exit(-1);
+            printf("program exit!\n");exit(-1);
             }
             len = strlen(tmp) + 1;
             if (len > (stack_limit - p)) {
@@ -1564,7 +1564,7 @@ static abi_ulong setup_arg_pages(struct linux_binprm *bprm,
                         MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
     if (error == -1) {
         perror("mmap stack");
-        exit(-1);
+    printf("program exit!\n");exit(-1);
     }
 
     /* We reserve one extra page at the top of the stack as guard.  */
@@ -1607,7 +1607,7 @@ static void zero_bss(abi_ulong elf_bss, abi_ulong last_bss, int prot)
                        prot, MAP_FIXED | MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
         if (p == MAP_FAILED) {
             perror("cannot mmap brk");
-            exit(-1);
+        printf("program exit!\n");exit(-1);
         }
     }
 
@@ -1958,7 +1958,7 @@ static void probe_guest_base(const char *image_name,
 
 exit_errmsg:
     fprintf(stderr, "%s: %s\n", image_name, errmsg);
-    exit(-1);
+printf("program exit!\n");exit(-1);
 }
 
 
@@ -2187,7 +2187,7 @@ static void load_elf_image(const char *image_name, int image_fd,
     errmsg = strerror(errno);
  exit_errmsg:
     fprintf(stderr, "%s: %s\n", image_name, errmsg);
-    exit(-1);
+printf("program exit!\n");exit(-1);
 }
 
 static void load_elf_interp(const char *filename, struct image_info *info,
@@ -2213,7 +2213,7 @@ static void load_elf_interp(const char *filename, struct image_info *info,
 
  exit_perror:
     fprintf(stderr, "%s: %s\n", filename, strerror(errno));
-    exit(-1);
+printf("program exit!\n");exit(-1);
 }
 
 static int symfind(const void *s0, const void *s1)
@@ -2416,7 +2416,7 @@ int load_elf_binary(struct linux_binprm *bprm, struct image_info *info)
 
     if (!bprm->p) {
         fprintf(stderr, "%s: %s\n", bprm->filename, strerror(E2BIG));
-        exit(-1);
+    printf("program exit!\n");exit(-1);
     }
 
     if (elf_interpreter) {

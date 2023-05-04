@@ -698,7 +698,7 @@ void aio_context_setup(AioContext *ctx)
     if (getenv("QEMU_AIO_POLL_MAX_NS")) {
         fprintf(stderr, "The QEMU_AIO_POLL_MAX_NS environment variable has "
                 "been replaced with -object iothread,poll-max-ns=NUM\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
 #ifdef CONFIG_EPOLL_CREATE1

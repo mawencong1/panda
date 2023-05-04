@@ -778,7 +778,7 @@ tb_page_addr_t get_page_addr_code(CPUArchState *env1, target_ulong addr)
          * we can't proceed further.
          */
         report_bad_exec(cpu, addr);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     p = (void *)((uintptr_t)addr + env1->tlb_table[mmu_idx][page_index].addend);
     return qemu_ram_addr_from_host_nofail(p);

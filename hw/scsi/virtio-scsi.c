@@ -212,7 +212,7 @@ static void *virtio_scsi_load_request(QEMUFile *f, SCSIRequest *sreq)
     if (virtio_scsi_parse_req(req, sizeof(VirtIOSCSICmdReq) + vs->cdb_size,
                               sizeof(VirtIOSCSICmdResp) + vs->sense_size) < 0) {
         error_report("invalid SCSI request migration data");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     scsi_req_ref(sreq);

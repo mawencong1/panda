@@ -29,15 +29,15 @@ typedef struct {
 
 void parse_header(FILE *f, file_header *hdr) {
     if (1 != fread(hdr, sizeof(file_header), 1, f))
-        exit(1);
+    printf("program exit!\n");exit(1);
     if (hdr->magic != MAGIC)
-        exit(1);
+    printf("program exit!\n");exit(1);
 }
 
 file_entry * parse_record(FILE *f) {
     file_entry *ret = (file_entry *) malloc(sizeof(file_entry));
     if (1 != fread(ret, sizeof(file_entry), 1, f))
-        exit(1);
+    printf("program exit!\n");exit(1);
     return ret;
 }
 
@@ -51,7 +51,7 @@ void consume_record(file_entry *ent) {
     }
     else {
         printf("Unknown type %x\n", ent->type);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     free(ent);
 }

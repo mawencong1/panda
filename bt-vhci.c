@@ -154,7 +154,7 @@ void bt_vhci_init(struct HCIInfo *info)
                         VHCI_DEV, strerror(err[0]), err[0]);
         fprintf(stderr, "qemu: Can't open `%s': %s (%i)\n",
                         VHCI_UDEV, strerror(err[1]), err[1]);
-        exit(-1);
+    printf("program exit!\n");exit(-1);
     }
 
     s = g_malloc0(sizeof(struct bt_vhci_s));

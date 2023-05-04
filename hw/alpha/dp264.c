@@ -110,14 +110,14 @@ static void clipper_init(MachineState *machine)
                                 bios_name ? bios_name : "palcode-clipper");
     if (palcode_filename == NULL) {
         error_report("no palcode provided");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     size = load_elf(palcode_filename, cpu_alpha_superpage_to_phys,
                     NULL, &palcode_entry, &palcode_low, &palcode_high,
                     0, EM_ALPHA, 0, 0);
     if (size < 0) {
         error_report("could not load palcode '%s'", palcode_filename);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     g_free(palcode_filename);
 
@@ -137,7 +137,7 @@ static void clipper_init(MachineState *machine)
                         0, EM_ALPHA, 0, 0);
         if (size < 0) {
             error_report("could not load kernel '%s'", kernel_filename);
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
 
         cpus[0]->env.trap_arg1 = kernel_entry;
@@ -155,7 +155,7 @@ static void clipper_init(MachineState *machine)
             if (initrd_size < 0) {
                 error_report("could not load initial ram disk '%s'",
                              initrd_filename);
-                exit(1);
+            printf("program exit!\n");exit(1);
             }
 
             /* Put the initrd image as high in memory as possible.  */

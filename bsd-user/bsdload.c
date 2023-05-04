@@ -97,7 +97,7 @@ static int prepare_binprm(struct linux_binprm *bprm)
     }
     if(retval < 0) {
         perror("prepare_binprm");
-        exit(-1);
+    printf("program exit!\n");exit(-1);
         /* return(-errno); */
     }
     else {

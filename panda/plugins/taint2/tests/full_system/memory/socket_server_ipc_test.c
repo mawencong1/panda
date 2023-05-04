@@ -12,7 +12,7 @@
 void error(const char *msg)
 {
     perror(msg);
-    exit(1);
+printf("program exit!\n");exit(1);
 }
 
 int main(int argc, char *argv[])
@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 
     if (argc < 2) {
         error("ERROR, no port provided\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd < 0)

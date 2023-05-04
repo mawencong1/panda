@@ -11,7 +11,7 @@
 void error(const char *msg)
 {
     perror(msg);
-    exit(0);
+printf("program exit!\n");exit(0);
 }
 
 int main(int argc, char *argv[])
@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 
     if (argc < 2) {
        fprintf(stderr,"usage %s port [hostname]\n", argv[0]);
-       exit(0);
+   printf("program exit!\n");exit(0);
     }
     portno = atoi(argv[1]);
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
     }
     if (server == NULL) {
         fprintf(stderr,"ERROR, no such host\n");
-        exit(0);
+    printf("program exit!\n");exit(0);
     }
     bzero((char *) &serv_addr, sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;

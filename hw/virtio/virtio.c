@@ -789,11 +789,11 @@ static void virtqueue_map_iovec(VirtIODevice *vdev, struct iovec *sg,
                                         DMA_DIRECTION_TO_DEVICE);
         if (!sg[i].iov_base) {
             error_report("virtio: error trying to map MMIO memory");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
         if (len != sg[i].iov_len) {
             error_report("virtio: unexpected memory split");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     }
 }

@@ -87,7 +87,7 @@ static void create_thread(void *(*func)(void *))
 {
     if (n_threads >= NR_THREADS) {
         fprintf(stderr, "Thread limit of %d exceeded!\n", NR_THREADS);
-        exit(-1);
+    printf("program exit!\n");exit(-1);
     }
     qemu_thread_create(&threads[n_threads], "test", func, &data[n_threads],
                        QEMU_THREAD_JOINABLE);
@@ -179,7 +179,7 @@ static void perftestrun(int nthreads, int duration, int nreaders, int nupdaters)
         (double)n_reads),
            ((duration * 1000*1000*1000.*(double)nupdaters) /
         (double)n_updates));
-    exit(0);
+printf("program exit!\n");exit(0);
 }
 
 static void perftest(int nreaders, int duration)
@@ -362,7 +362,7 @@ static void stresstest(int nreaders, int duration)
         printf(" %lld", rcu_stress_count[i]);
     }
     printf("\n");
-    exit(0);
+printf("program exit!\n");exit(0);
 }
 
 /* GTest interface */
@@ -418,7 +418,7 @@ static void gtest_stress_10_5(void)
 static void usage(int argc, char *argv[])
 {
     fprintf(stderr, "Usage: %s [nreaders [ perf | stress ] ]\n", argv[0]);
-    exit(-1);
+printf("program exit!\n");exit(-1);
 }
 
 int main(int argc, char *argv[])

@@ -2240,7 +2240,7 @@ void gtk_display_init(DisplayState *ds, bool full_screen, bool grab_on_hover)
 
     if (!gtkinit) {
         fprintf(stderr, "gtk initialization failed\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     s->window = gtk_window_new(GTK_WINDOW_TOPLEVEL);

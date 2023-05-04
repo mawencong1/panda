@@ -26,7 +26,7 @@ typedef struct ISADebugExitState {
 static void debug_exit_write(void *opaque, hwaddr addr, uint64_t val,
                              unsigned width)
 {
-    exit((val << 1) | 1);
+printf("program exit!\n");exit((val << 1) | 1);
 }
 
 static const MemoryRegionOps debug_exit_ops = {

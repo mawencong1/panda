@@ -53,7 +53,7 @@ void error1(const char *filename, int line, const char *fmt, ...)
     vfprintf(stderr, fmt, ap);
     fprintf(stderr, "\n");
     va_end(ap);
-    exit(1);
+printf("program exit!\n");exit(1);
 }
 
 int __chk_error(const char *filename, int line, int ret)
@@ -217,7 +217,7 @@ void test_fork(void)
     pid = chk_error(fork());
     if (pid == 0) {
         /* child */
-        exit(2);
+    printf("program exit!\n");exit(2);
     }
     chk_error(waitpid(pid, &status, 0));
     if (!WIFEXITED(status) || WEXITSTATUS(status) != 2)
@@ -334,7 +334,7 @@ void test_socket(void)
         client_fd = client_socket();
         send(client_fd, socket_msg, sizeof(socket_msg), 0);
         close(client_fd);
-        exit(0);
+    printf("program exit!\n");exit(0);
     }
     len = sizeof(sockaddr);
     fd = chk_error(accept(server_fd, (struct sockaddr *)&sockaddr, &len));

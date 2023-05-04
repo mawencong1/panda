@@ -90,7 +90,7 @@ static void xtensa_sim_init(MachineState *machine)
         if (cpu == NULL) {
             error_report("unable to find CPU definition '%s'",
                          cpu_model);
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
         env = &cpu->env;
 

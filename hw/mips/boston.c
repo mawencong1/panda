@@ -450,7 +450,7 @@ static void boston_mach_init(MachineState *machine)
     if ((machine->ram_size % G_BYTE) ||
         (machine->ram_size > (2 * G_BYTE))) {
         error_report("Memory size must be 1GB or 2GB");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     cpu_model = machine->cpu_model ?: "I6400";
@@ -464,7 +464,7 @@ static void boston_mach_init(MachineState *machine)
 
     if (!cpu_supports_cps_smp(cpu_model)) {
         error_report("Boston requires CPUs which support CPS");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     is_64b = cpu_supports_isa(cpu_model, ISA_MIPS64);
@@ -478,7 +478,7 @@ static void boston_mach_init(MachineState *machine)
 
     if (err != NULL) {
         error_report("%s", error_get_pretty(err));
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     sysbus_mmio_map_overlap(SYS_BUS_DEVICE(s->cps), 0, 0, 1);
@@ -548,20 +548,20 @@ static void boston_mach_init(MachineState *machine)
         if (fw_size == -1) {
             error_printf("unable to load firmware image '%s'\n",
                           machine->firmware);
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     } else if (machine->kernel_filename) {
         fit_err = load_fit(&boston_fit_loader, machine->kernel_filename, s);
         if (fit_err) {
             error_printf("unable to load FIT image\n");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
 
         gen_firmware(memory_region_get_ram_ptr(flash) + 0x7c00000,
                      s->kernel_entry, s->fdt_base, is_64b);
     } else if (!qtest_enabled()) {
         error_printf("Please provide either a -kernel or -bios argument\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 }
 

@@ -325,7 +325,7 @@ static void z2_init(MachineState *machine)
     if (!dinfo && !qtest_enabled()) {
         fprintf(stderr, "Flash image must be given with the "
                 "'pflash' parameter\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     if (!pflash_cfi01_register(Z2_FLASH_BASE,
@@ -334,7 +334,7 @@ static void z2_init(MachineState *machine)
                                sector_len, Z2_FLASH_SIZE / sector_len,
                                4, 0, 0, 0, 0, be)) {
         fprintf(stderr, "qemu: Error registering flash memory.\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     /* setup keypad */

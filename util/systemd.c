@@ -62,7 +62,7 @@ unsigned int check_socket_activation(void)
             error_report("Socket activation failed: "
                          "invalid file descriptor fd = %d: %m",
                          fd);
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
     }
 

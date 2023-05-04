@@ -194,7 +194,7 @@ QTestState *qtest_init_without_qmp_handshake(const char *extra_args)
                                   qmp_socket_path,
                                   extra_args ?: "");
         execlp("/bin/sh", "sh", "-c", command, NULL);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     s->fd = socket_accept(sock);
@@ -307,7 +307,7 @@ static GString *qtest_recv_line(QTestState *s)
 
         if (len == -1 || len == 0) {
             fprintf(stderr, "Broken pipe\n");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
 
         g_string_append_len(s->rx, buffer, len);
@@ -392,7 +392,7 @@ static void qmp_response(JSONMessageParser *parser, GQueue *tokens)
     obj = json_parser_parse(tokens, NULL);
     if (!obj) {
         fprintf(stderr, "QMP JSON response parsing failed\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     g_assert(!qmp->response);
@@ -418,7 +418,7 @@ QDict *qmp_fd_receive(int fd)
 
         if (len == -1 || len == 0) {
             fprintf(stderr, "Broken pipe\n");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
 
         if (log) {

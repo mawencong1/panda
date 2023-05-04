@@ -44,7 +44,7 @@ static uint64_t avatar_pyperipheral_read(void *opaque, hwaddr offset,
     if (pRes == NULL){
         fprintf(stderr, "[Avatar-PyPeripheral] Memory Read failed\n");
         PyErr_Print();
-        exit(-1);
+    printf("program exit!\n");exit(-1);
     }
 
 #if PY_MAJOR_VERSION >= 3
@@ -71,7 +71,7 @@ static void avatar_pyperipheral_write(void *opaque, hwaddr offset,
     if (pRes == NULL){
         fprintf(stderr, "[Avatar-PyPeripheral] Memory Write failed\n");
         PyErr_Print();
-        exit(-1);
+    printf("program exit!\n");exit(-1);
     }
 
     Py_DECREF(pRes);
@@ -115,7 +115,7 @@ static void avatar_pyperipheral_realize(DeviceState *dev, Error **errp)
     if (pModule == NULL){
         fprintf(stderr, "[Avatar-PyPeripheral] Couldn't import PythonFile:\n");
         PyErr_Print();
-        exit(-1);
+    printf("program exit!\n");exit(-1);
     }
 
     pModuleDict = PyModule_GetDict(pModule);
@@ -125,7 +125,7 @@ static void avatar_pyperipheral_realize(DeviceState *dev, Error **errp)
     if (!PyCallable_Check(pPeriphClass)){
         fprintf(stderr, "[Avatar-PyPeripheral] Couldn't instantiate peripheral class\n");
         PyErr_Print();
-        exit(-1);
+    printf("program exit!\n");exit(-1);
     }
 
     pArgs = Py_BuildValue("sli", s->name, s->address, s->size);
@@ -147,7 +147,7 @@ static void avatar_pyperipheral_realize(DeviceState *dev, Error **errp)
     if (pKwargs == NULL){
         fprintf(stderr, "[Avatar-PyPeripheral] Failed to create kwargs-dict:\n");
         PyErr_Print();
-        exit(-1);
+    printf("program exit!\n");exit(-1);
     }
 
 
@@ -156,7 +156,7 @@ static void avatar_pyperipheral_realize(DeviceState *dev, Error **errp)
     if (s->pyperipheral == NULL){
         fprintf(stderr, "[Avatar-PyPeripheral] Couldn't instantiate peripheral object\n");
         PyErr_Print();
-        exit(-1);
+    printf("program exit!\n");exit(-1);
     }
     Py_DECREF(pFile);
     Py_DECREF(pModule);

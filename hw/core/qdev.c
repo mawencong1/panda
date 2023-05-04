@@ -374,7 +374,7 @@ void qdev_init_nofail(DeviceState *dev)
     if (err) {
         error_reportf_err(err, "Initialization of device %s failed: ",
                           object_get_typename(OBJECT(dev)));
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     object_unref(OBJECT(dev));
 }

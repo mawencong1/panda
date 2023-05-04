@@ -99,7 +99,7 @@ static void realview_init(MachineState *machine,
     cpu_oc = cpu_class_by_name(TYPE_ARM_CPU, machine->cpu_model);
     if (!cpu_oc) {
         fprintf(stderr, "Unable to find CPU definition\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     for (n = 0; n < smp_cpus; n++) {

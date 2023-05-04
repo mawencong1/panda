@@ -626,7 +626,7 @@ static abi_ulong copy_elf_strings(int argc,char ** argv, void **page,
         tmp = argv[argc];
         if (!tmp) {
             fprintf(stderr, "VFS: argc is wrong");
-            exit(-1);
+        printf("program exit!\n");exit(-1);
         }
         tmp1 = tmp;
         while (*tmp++);
@@ -681,7 +681,7 @@ static abi_ulong setup_arg_pages(abi_ulong p, struct linux_binprm *bprm,
                         -1, 0);
     if (error == -1) {
         perror("stk mmap");
-        exit(-1);
+    printf("program exit!\n");exit(-1);
     }
     /* we reserve one extra page at the top of the stack as guard */
     target_mprotect(error + size, qemu_host_page_size, PROT_NONE);
@@ -712,7 +712,7 @@ static void set_brk(abi_ulong start, abi_ulong end)
                        PROT_READ | PROT_WRITE | PROT_EXEC,
                        MAP_FIXED | MAP_PRIVATE | MAP_ANON, -1, 0) == -1) {
             perror("cannot mmap brk");
-            exit(-1);
+        printf("program exit!\n");exit(-1);
         }
 }
 
@@ -890,7 +890,7 @@ static abi_ulong load_elf_interp(struct elfhdr * interp_elf_ex,
         }
         if (retval < 0) {
                 perror("load_elf_interp");
-                exit(-1);
+            printf("program exit!\n");exit(-1);
                 free (elf_phdata);
                 return retval;
         }
@@ -909,7 +909,7 @@ static abi_ulong load_elf_interp(struct elfhdr * interp_elf_ex,
                                 -1, 0);
             if (error == -1) {
                 perror("mmap");
-                exit(-1);
+            printf("program exit!\n");exit(-1);
             }
             load_addr = error;
             load_addr_set = 1;
@@ -1204,7 +1204,7 @@ int load_elf_binary(struct linux_binprm * bprm, struct target_pt_regs * regs,
 
     if (retval < 0) {
         perror("load_elf_binary");
-        exit(-1);
+    printf("program exit!\n");exit(-1);
         free (elf_phdata);
         return -errno;
     }
@@ -1258,7 +1258,7 @@ int load_elf_binary(struct linux_binprm * bprm, struct target_pt_regs * regs,
             }
             if(retval < 0) {
                 perror("load_elf_binary2");
-                exit(-1);
+            printf("program exit!\n");exit(-1);
             }
 
             /* If the program interpreter is one of these two,
@@ -1282,7 +1282,7 @@ int load_elf_binary(struct linux_binprm * bprm, struct target_pt_regs * regs,
                 }
                 else {
                     perror(elf_interpreter);
-                    exit(-1);
+                printf("program exit!\n");exit(-1);
                     /* retval = -errno; */
                 }
             }
@@ -1299,7 +1299,7 @@ int load_elf_binary(struct linux_binprm * bprm, struct target_pt_regs * regs,
             }
             if (retval < 0) {
                 perror("load_elf_binary3");
-                exit(-1);
+            printf("program exit!\n");exit(-1);
                 free (elf_phdata);
                 free(elf_interpreter);
                 close(bprm->fd);
@@ -1420,7 +1420,7 @@ int load_elf_binary(struct linux_binprm * bprm, struct target_pt_regs * regs,
                                 -1, 0);
             if (error == -1) {
                 perror("mmap");
-                exit(-1);
+            printf("program exit!\n");exit(-1);
             }
             load_bias = TARGET_ELF_PAGESTART(error - elf_ppnt->p_vaddr);
         }
@@ -1435,7 +1435,7 @@ int load_elf_binary(struct linux_binprm * bprm, struct target_pt_regs * regs,
                              TARGET_ELF_PAGEOFFSET(elf_ppnt->p_vaddr)));
         if (error == -1) {
             perror("mmap");
-            exit(-1);
+        printf("program exit!\n");exit(-1);
         }
 
 #ifdef LOW_ELF_STACK
@@ -1493,7 +1493,7 @@ int load_elf_binary(struct linux_binprm * bprm, struct target_pt_regs * regs,
         if (elf_entry == ~((abi_ulong)0UL)) {
             printf("Unable to load interpreter\n");
             free(elf_phdata);
-            exit(-1);
+        printf("program exit!\n");exit(-1);
             return 0;
         }
     }

@@ -443,7 +443,7 @@ static void GCC_FMT_ATTR(2, 3) quorum_err(QuorumAIOCB *acb,
     vfprintf(stderr, fmt, ap);
     fprintf(stderr, "\n");
     va_end(ap);
-    exit(1);
+printf("program exit!\n");exit(1);
 }
 
 static bool quorum_compare(QuorumAIOCB *acb,

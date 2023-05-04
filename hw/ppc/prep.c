@@ -523,7 +523,7 @@ static void ppc_prep_init(MachineState *machine)
         cpu = cpu_ppc_init(machine->cpu_model);
         if (cpu == NULL) {
             fprintf(stderr, "Unable to find PowerPC CPU definition\n");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
         env = &cpu->env;
 
@@ -548,7 +548,7 @@ static void ppc_prep_init(MachineState *machine)
                                           ram_size - kernel_base);
         if (kernel_size < 0) {
             error_report("could not load kernel '%s'", kernel_filename);
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
         /* load initrd */
         if (initrd_filename) {
@@ -558,7 +558,7 @@ static void ppc_prep_init(MachineState *machine)
             if (initrd_size < 0) {
                 error_report("could not load initial ram disk '%s'",
                              initrd_filename);
-                exit(1);
+            printf("program exit!\n");exit(1);
             }
         } else {
             initrd_base = 0;
@@ -580,13 +580,13 @@ static void ppc_prep_init(MachineState *machine)
         }
         if (ppc_boot_device == '\0') {
             fprintf(stderr, "No valid boot device for Mac99 machine\n");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     }
 
     if (PPC_INPUT(env) != PPC_FLAGS_INPUT_6xx) {
         error_report("Only 6xx bus is supported on PREP machine");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     dev = qdev_create(NULL, "raven-pcihost");
@@ -601,7 +601,7 @@ static void ppc_prep_init(MachineState *machine)
     pci_bus = (PCIBus *)qdev_get_child_bus(dev, "pci.0");
     if (pci_bus == NULL) {
         fprintf(stderr, "Couldn't create PCI host controller.\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     sysctrl->contiguous_map_irq = qdev_get_gpio_in(dev, 0);
 
@@ -728,12 +728,12 @@ static void ibm_40p_init(MachineState *machine)
     if (!cpu) {
         error_report("could not initialize CPU '%s'",
                      machine->cpu_model);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     env = &cpu->env;
     if (PPC_INPUT(env) != PPC_FLAGS_INPUT_6xx) {
         error_report("only 6xx bus is supported on this machine");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     if (env->flags & POWERPC_FLAG_RTC_CLK) {
@@ -758,7 +758,7 @@ static void ibm_40p_init(MachineState *machine)
     pci_bus = PCI_BUS(qdev_get_child_bus(dev, "pci.0"));
     if (!pci_bus) {
         error_report("could not create PCI host controller");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     /* PCI -> ISA bridge */
@@ -826,7 +826,7 @@ static void ibm_40p_init(MachineState *machine)
         if (kernel_size < 0) {
             error_report("could not load kernel '%s'",
                          machine->kernel_filename);
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
         fw_cfg_add_i32(fw_cfg, FW_CFG_KERNEL_ADDR, kernel_base);
         fw_cfg_add_i32(fw_cfg, FW_CFG_KERNEL_SIZE, kernel_size);
@@ -839,7 +839,7 @@ static void ibm_40p_init(MachineState *machine)
             if (initrd_size < 0) {
                 error_report("could not load initial ram disk '%s'",
                              machine->initrd_filename);
-                exit(1);
+            printf("program exit!\n");exit(1);
             }
             fw_cfg_add_i32(fw_cfg, FW_CFG_INITRD_ADDR, initrd_base);
             fw_cfg_add_i32(fw_cfg, FW_CFG_INITRD_SIZE, initrd_size);

@@ -95,7 +95,7 @@ static void puv3_load_kernel(const char *kernel_filename)
     }
     if (kernel_filename == NULL) {
         error_report("kernel parameter cannot be empty");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     /* only zImage format supported */
@@ -103,7 +103,7 @@ static void puv3_load_kernel(const char *kernel_filename)
             KERNEL_MAX_SIZE);
     if (size < 0) {
         error_report("Load kernel error: '%s'", kernel_filename);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     /* cheat curses that we have a graphic console, only under ocd console */
@@ -121,7 +121,7 @@ static void puv3_init(MachineState *machine)
 
     if (initrd_filename) {
         error_report("Please use kernel built-in initramdisk");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     if (!cpu_model) {
@@ -131,7 +131,7 @@ static void puv3_init(MachineState *machine)
     cpu = uc32_cpu_init(cpu_model);
     if (!cpu) {
         error_report("Unable to find CPU definition");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     env = &cpu->env;
 

@@ -638,7 +638,7 @@ target_ulong do_arm_semihosting(CPUARMState *env)
             ret = (args == ADP_Stopped_ApplicationExit) ? 0 : 1;
         }
         gdb_exit(env, ret);
-        exit(ret);
+    printf("program exit!\n");exit(ret);
     case TARGET_SYS_SYNCCACHE:
         /* Clean the D-cache and invalidate the I-cache for the specified
          * virtual address range. This is a nop for us since we don't

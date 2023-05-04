@@ -47,7 +47,7 @@ static QOSState *qvirtio_scsi_start(const char *extra_opts)
     }
 
     g_printerr("virtio-scsi tests are only available on x86 or ppc64\n");
-    exit(EXIT_FAILURE);
+printf("program exit!\n");exit(EXIT_FAILURE);
 }
 
 static void qvirtio_scsi_stop(QOSState *qs)

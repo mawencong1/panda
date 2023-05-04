@@ -320,7 +320,7 @@ void armv7m_load_kernel(ARMCPU *cpu, const char *kernel_filename, int mem_size)
 
     if (!kernel_filename && !qtest_enabled()) {
         fprintf(stderr, "Guest image must be specified (using -kernel)\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     if (kernel_filename) {
@@ -332,7 +332,7 @@ void armv7m_load_kernel(ARMCPU *cpu, const char *kernel_filename, int mem_size)
         }
         if (image_size < 0) {
             error_report("Could not load kernel '%s'", kernel_filename);
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     }
 

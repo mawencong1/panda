@@ -977,7 +977,7 @@ static void *spapr_build_fdt(sPAPRMachineState *spapr,
     ret = spapr_populate_memory(spapr, fdt);
     if (ret < 0) {
         error_report("couldn't setup memory nodes in fdt");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     /* /vdevice */
@@ -987,7 +987,7 @@ static void *spapr_build_fdt(sPAPRMachineState *spapr,
         ret = spapr_rng_populate_dt(fdt);
         if (ret < 0) {
             error_report("could not set up rng device in the fdt");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     }
 
@@ -995,7 +995,7 @@ static void *spapr_build_fdt(sPAPRMachineState *spapr,
         ret = spapr_populate_pci_dt(phb, PHANDLE_XICP, fdt);
         if (ret < 0) {
             error_report("couldn't setup PCI devices in fdt");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     }
 
@@ -1012,7 +1012,7 @@ static void *spapr_build_fdt(sPAPRMachineState *spapr,
                                     SPAPR_DR_CONNECTOR_TYPE_CPU);
         if (ret < 0) {
             error_report("Couldn't set up CPU DR device tree properties");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     }
 
@@ -1042,7 +1042,7 @@ static void *spapr_build_fdt(sPAPRMachineState *spapr,
     ret = spapr_dt_cas_updates(spapr, fdt, spapr->ov5_cas);
     if (ret < 0) {
         error_report("couldn't setup CAS properties fdt");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     return fdt;
@@ -1235,7 +1235,7 @@ static void find_unknown_sysbus_device(SysBusDevice *sbdev, void *opaque)
     if (!matched) {
         error_report("Device %s is not supported by this machine yet.",
                      qdev_fw_name(DEVICE(sbdev)));
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 }
 
@@ -1295,7 +1295,7 @@ static void ppc_spapr_reset(void)
     if (fdt_totalsize(fdt) > FDT_MAX_SIZE) {
         error_report("FDT too big ! 0x%x bytes (max is 0x%x)",
                      fdt_totalsize(fdt), FDT_MAX_SIZE);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     /* Load the fdt */
@@ -1916,7 +1916,7 @@ static void spapr_init_cpus(sPAPRMachineState *spapr)
 
     if (!type) {
         error_report("Unable to find sPAPR CPU Core definition");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     possible_cpus = mc->possible_cpu_arch_ids(machine);
@@ -1924,17 +1924,17 @@ static void spapr_init_cpus(sPAPRMachineState *spapr)
         if (smp_cpus % smp_threads) {
             error_report("smp_cpus (%u) must be multiple of threads (%u)",
                          smp_cpus, smp_threads);
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
         if (max_cpus % smp_threads) {
             error_report("max_cpus (%u) must be multiple of threads (%u)",
                          max_cpus, smp_threads);
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     } else {
         if (max_cpus != smp_cpus) {
             error_report("This machine version does not support CPU hotplug");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
         boot_cores_nr = possible_cpus->len;
     }
@@ -1998,7 +1998,7 @@ static void ppc_spapr_init(MachineState *machine)
 
     if (rma_alloc_size == -1) {
         error_report("Unable to create RMA");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     if (rma_alloc_size && (rma_alloc_size < node0_size)) {
@@ -2031,7 +2031,7 @@ static void ppc_spapr_init(MachineState *machine)
     if (spapr->rma_size > node0_size) {
         error_report("Numa node 0 has to span the RMA (%#08"HWADDR_PRIx")",
                      spapr->rma_size);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     /* Setup a load limit for the ramdisk leaving room for SLOF and FDT */
@@ -2106,7 +2106,7 @@ static void ppc_spapr_init(MachineState *machine)
             error_report("Specified number of memory slots %"
                          PRIu64" exceeds max supported %d",
                          machine->ram_slots, max_memslots);
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
 
         spapr->hotplug_memory.base = ROUND_UP(machine->ram_size,
@@ -2124,22 +2124,22 @@ static void ppc_spapr_init(MachineState *machine)
     filename = qemu_find_file(QEMU_FILE_TYPE_BIOS, "spapr-rtas.bin");
     if (!filename) {
         error_report("Could not find LPAR rtas '%s'", "spapr-rtas.bin");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     spapr->rtas_size = get_image_size(filename);
     if (spapr->rtas_size < 0) {
         error_report("Could not get size of LPAR rtas '%s'", filename);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     spapr->rtas_blob = g_malloc(spapr->rtas_size);
     if (load_image_size(filename, spapr->rtas_blob, spapr->rtas_size) < 0) {
         error_report("Could not load LPAR rtas '%s'", filename);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     if (spapr->rtas_size > RTAS_MAX_SIZE) {
         error_report("RTAS too big ! 0x%zx bytes (max is 0x%x)",
                      (size_t)spapr->rtas_size, RTAS_MAX_SIZE);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     g_free(filename);
 
@@ -2209,7 +2209,7 @@ static void ppc_spapr_init(MachineState *machine)
         error_report(
             "pSeries SLOF firmware requires >= %ldM guest RMA (Real Mode Area memory)",
             MIN_RMA_SLOF);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     if (kernel_filename) {
@@ -2228,7 +2228,7 @@ static void ppc_spapr_init(MachineState *machine)
         if (spapr->kernel_size < 0) {
             error_report("error loading %s: %s", kernel_filename,
                          load_elf_strerror(spapr->kernel_size));
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
 
         /* load initrd */
@@ -2245,7 +2245,7 @@ static void ppc_spapr_init(MachineState *machine)
             if (spapr->initrd_size < 0) {
                 error_report("could not load initial ram disk '%s'",
                              initrd_filename);
-                exit(1);
+            printf("program exit!\n");exit(1);
             }
         }
     }
@@ -2256,12 +2256,12 @@ static void ppc_spapr_init(MachineState *machine)
     filename = qemu_find_file(QEMU_FILE_TYPE_BIOS, bios_name);
     if (!filename) {
         error_report("Could not find LPAR firmware '%s'", bios_name);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     fw_size = load_image_targphys(filename, 0, FW_MAX_SIZE);
     if (fw_size <= 0) {
         error_report("Could not load LPAR firmware '%s'", filename);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     g_free(filename);
 
@@ -2300,7 +2300,7 @@ static int spapr_kvm_type(const char *vm_type)
     }
 
     error_report("Unknown kvm-type specified '%s'", vm_type);
-    exit(1);
+printf("program exit!\n");exit(1);
 }
 
 /*

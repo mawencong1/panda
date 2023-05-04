@@ -1209,7 +1209,7 @@ static void bdrv_ssh_init(void)
     r = libssh2_init(0);
     if (r != 0) {
         fprintf(stderr, "libssh2 initialization failed, %d\n", r);
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 
     bdrv_register(&bdrv_ssh);

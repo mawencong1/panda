@@ -407,7 +407,7 @@ static void curses_keyboard_setup(void)
     if(keyboard_layout) {
         kbd_layout = init_keyboard_layout(name2keysym, keyboard_layout);
         if (!kbd_layout)
-            exit(1);
+        printf("program exit!\n");exit(1);
     }
 }
 
@@ -424,7 +424,7 @@ void curses_display_init(DisplayState *ds, int full_screen)
 #ifndef _WIN32
     if (!isatty(1)) {
         fprintf(stderr, "We need a terminal output\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 #endif
 

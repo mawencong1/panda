@@ -29,7 +29,7 @@ ivshmem_client_usage(const char *name, int code)
     fprintf(stderr, "  -S <unix_sock_path>: path to the unix socket\n"
                     "     to connect to.\n"
                     "     default=%s\n", IVSHMEM_CLIENT_DEFAULT_UNIX_SOCK_PATH);
-    exit(code);
+printf("program exit!\n");exit(code);
 }
 
 /* parse the program arguments, exit on error */

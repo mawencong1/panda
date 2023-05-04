@@ -52,7 +52,7 @@ void sig_handler(int signo) {
 void checked_handler_register(int signo) {
     if (signal(signo, sig_handler) == SIG_ERR) {
         fprintf(stderr, "Error registering handler for signal number %d: %s\n", signo, strerror(errno));
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 }
 
@@ -61,7 +61,7 @@ int main(void) {
     log_file = fopen(log_path, "a");
     if (log_file == NULL) {
         fprintf(stderr, "Failed to open log_file file \'%s\': %s\n", log_path, strerror(errno));
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 
     checked_handler_register(SIGSEGV);

@@ -858,7 +858,7 @@ static void load_linux(PCMachineState *pcms,
         MIN(ARRAY_SIZE(header), kernel_size)) {
         fprintf(stderr, "qemu: could not load kernel '%s': %s\n",
                 kernel_filename, strerror(errno));
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     /* kernel protocol version */
@@ -961,14 +961,14 @@ static void load_linux(PCMachineState *pcms,
     if (initrd_filename) {
         if (protocol < 0x200) {
             fprintf(stderr, "qemu: linux kernel too old to load a ram disk\n");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
 
         initrd_size = get_image_size(initrd_filename);
         if (initrd_size < 0) {
             fprintf(stderr, "qemu: error reading initrd %s: %s\n",
                     initrd_filename, strerror(errno));
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
 
         initrd_addr = (initrd_max-initrd_size) & ~4095;
@@ -992,7 +992,7 @@ static void load_linux(PCMachineState *pcms,
     setup_size = (setup_size+1)*512;
     if (setup_size > kernel_size) {
         fprintf(stderr, "qemu: invalid kernel header\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     kernel_size -= setup_size;
 
@@ -1001,11 +1001,11 @@ static void load_linux(PCMachineState *pcms,
     fseek(f, 0, SEEK_SET);
     if (fread(setup, 1, setup_size, f) != setup_size) {
         fprintf(stderr, "fread() failed\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     if (fread(kernel, 1, kernel_size, f) != kernel_size) {
         fprintf(stderr, "fread() failed\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     fclose(f);
 
@@ -1013,14 +1013,14 @@ static void load_linux(PCMachineState *pcms,
     if (dtb_filename) {
         if (protocol < 0x209) {
             fprintf(stderr, "qemu: Linux kernel too old to load a dtb\n");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
 
         dtb_size = get_image_size(dtb_filename);
         if (dtb_size <= 0) {
             fprintf(stderr, "qemu: error reading dtb %s: %s\n",
                     dtb_filename, strerror(errno));
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
 
         setup_data_offset = QEMU_ALIGN_UP(kernel_size, 16);
@@ -1160,13 +1160,13 @@ void pc_cpus_init(PCMachineState *pcms)
     model_pieces = g_strsplit(machine->cpu_model, ",", 2);
     if (!model_pieces[0]) {
         error_report("Invalid/empty CPU model name");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     oc = cpu_class_by_name(TYPE_X86_CPU, model_pieces[0]);
     if (oc == NULL) {
         error_report("Unable to find CPU definition: %s", model_pieces[0]);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     typename = object_class_get_name(oc);
     cc = CPU_CLASS(oc);
@@ -1273,7 +1273,7 @@ void pc_machine_done(Notifier *notifier, void *data)
                          "Extended Interrupt Mode enabled. "
                          "You can add an IOMMU using: "
                          "-device intel-iommu,intremap=on,eim=on");
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
     }
 }
@@ -1399,7 +1399,7 @@ void pc_memory_init(PCMachineState *pcms,
 
         error_report("\"-memory 'slots|maxmem'\" is not supported by: %s",
                      mc->name);
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 
     /* initialize hotplug memory address space */
@@ -1411,14 +1411,14 @@ void pc_memory_init(PCMachineState *pcms,
         if (machine->ram_slots > ACPI_MAX_RAM_SLOTS) {
             error_report("unsupported amount of memory slots: %"PRIu64,
                          machine->ram_slots);
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
 
         if (QEMU_ALIGN_UP(machine->maxram_size,
                           TARGET_PAGE_SIZE) != machine->maxram_size) {
             error_report("maximum memory size must by aligned to multiple of "
                          "%d bytes", TARGET_PAGE_SIZE);
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
 
         pcms->hotplug_memory.base =
@@ -1433,7 +1433,7 @@ void pc_memory_init(PCMachineState *pcms,
             hotplug_mem_size) {
             error_report("unsupported amount of maximum memory: " RAM_ADDR_FMT,
                          machine->maxram_size);
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
 
         memory_region_init(&pcms->hotplug_memory.mr, OBJECT(pcms),
@@ -2132,7 +2132,7 @@ bool pc_machine_is_smm_enabled(PCMachineState *pcms)
 
     if (pcms->smm == ON_OFF_AUTO_ON) {
         error_report("System Management Mode not supported by this hypervisor.");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     return false;
 }

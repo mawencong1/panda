@@ -204,7 +204,7 @@ static void versatile_init(MachineState *machine, int board_id)
          * Refuse to run rather than behaving very confusingly.
          */
         error_report("versatilepb: memory size must not exceed 256MB");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     if (!machine->cpu_model) {
@@ -214,7 +214,7 @@ static void versatile_init(MachineState *machine, int board_id)
     cpu_oc = cpu_class_by_name(TYPE_ARM_CPU, machine->cpu_model);
     if (!cpu_oc) {
         fprintf(stderr, "Unable to find CPU definition\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     cpuobj = object_new(object_class_get_name(cpu_oc));

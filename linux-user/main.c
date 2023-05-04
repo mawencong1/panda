@@ -1220,7 +1220,7 @@ void cpu_loop (CPUSPARCState *env)
         default:
             printf ("Unhandled trap: 0x%x\n", trapnr);
             cpu_dump_state(cs, stderr, fprintf, 0);
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
         process_pending_signals (env);
     }
@@ -2561,7 +2561,7 @@ kuser_fail:
         if (gdbsig) {
             gdb_handlesig(cs, gdbsig);
             if (gdbsig != TARGET_SIGTRAP) {
-                exit(EXIT_FAILURE);
+            printf("program exit!\n");exit(EXIT_FAILURE);
             }
         }
 
@@ -2720,7 +2720,7 @@ void cpu_loop(CPUSH4State *env)
         default:
             printf ("Unhandled trap: 0x%x\n", trapnr);
             cpu_dump_state(cs, stderr, fprintf, 0);
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
         process_pending_signals (env);
     }
@@ -2790,7 +2790,7 @@ void cpu_loop(CPUCRISState *env)
         default:
             printf ("Unhandled trap: 0x%x\n", trapnr);
             cpu_dump_state(cs, stderr, fprintf, 0);
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
         process_pending_signals (env);
     }
@@ -2885,7 +2885,7 @@ void cpu_loop(CPUMBState *env)
                     printf ("Unhandled hw-exception: 0x%x\n",
                             env->sregs[SR_ESR] & ESR_EC_MASK);
                     cpu_dump_state(cs, stderr, fprintf, 0);
-                    exit(EXIT_FAILURE);
+                printf("program exit!\n");exit(EXIT_FAILURE);
                     break;
             }
             break;
@@ -2909,7 +2909,7 @@ void cpu_loop(CPUMBState *env)
         default:
             printf ("Unhandled trap: 0x%x\n", trapnr);
             cpu_dump_state(cs, stderr, fprintf, 0);
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
         process_pending_signals (env);
     }
@@ -3050,17 +3050,17 @@ void cpu_loop(CPUAlphaState *env)
         switch (trapnr) {
         case EXCP_RESET:
             fprintf(stderr, "Reset requested. Exit\n");
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
             break;
         case EXCP_MCHK:
             fprintf(stderr, "Machine check exception. Exit\n");
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
             break;
         case EXCP_SMP_INTERRUPT:
         case EXCP_CLK_INTERRUPT:
         case EXCP_DEV_INTERRUPT:
             fprintf(stderr, "External interrupt. Exit\n");
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
             break;
         case EXCP_MMFAULT:
             env->lock_addr = -1;
@@ -3212,7 +3212,7 @@ void cpu_loop(CPUAlphaState *env)
         default:
             printf ("Unhandled trap: 0x%x\n", trapnr);
             cpu_dump_state(cs, stderr, fprintf, 0);
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
         process_pending_signals (env);
     }
@@ -3324,7 +3324,7 @@ void cpu_loop(CPUS390XState *env)
             default:
                 fprintf(stderr, "Unhandled program exception: %#x\n", n);
                 cpu_dump_state(cs, stderr, fprintf, 0);
-                exit(EXIT_FAILURE);
+            printf("program exit!\n");exit(EXIT_FAILURE);
             }
             break;
 
@@ -3344,7 +3344,7 @@ void cpu_loop(CPUS390XState *env)
         default:
             fprintf(stderr, "Unhandled trap: 0x%x\n", trapnr);
             cpu_dump_state(cs, stderr, fprintf, 0);
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
         process_pending_signals (env);
     }
@@ -3845,7 +3845,7 @@ static void handle_arg_log(const char *arg)
     mask = qemu_str_to_log_mask(arg);
     if (!mask) {
         qemu_print_log_usage(stdout);
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
     qemu_log_needs_buffers();
     qemu_set_log(mask);
@@ -3911,7 +3911,7 @@ static void handle_arg_pagesize(const char *arg)
     if (qemu_host_page_size == 0 ||
         (qemu_host_page_size & (qemu_host_page_size - 1)) != 0) {
         fprintf(stderr, "page size must be a power of two\n");
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 }
 
@@ -3921,7 +3921,7 @@ static void handle_arg_randseed(const char *arg)
 
     if (parse_uint_full(arg, &seed, 0) != 0 || seed > UINT_MAX) {
         fprintf(stderr, "Invalid seed number: %s\n", arg);
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
     srand(seed);
 }
@@ -3944,7 +3944,7 @@ static void handle_arg_cpu(const char *arg)
 #if defined(cpu_list)
         cpu_list(stdout, &fprintf);
 #endif
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 }
 
@@ -3981,12 +3981,12 @@ static void handle_arg_reserved_va(const char *arg)
 #endif
             ) {
             fprintf(stderr, "Reserved virtual address too big\n");
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
     }
     if (*p) {
         fprintf(stderr, "Unrecognised -R size suffix '%s'\n", p);
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 }
 
@@ -4004,7 +4004,7 @@ static void handle_arg_version(const char *arg)
 {
     printf("qemu-" TARGET_NAME " version " QEMU_VERSION QEMU_PKGVERSION
            "\n" QEMU_COPYRIGHT "\n");
-    exit(EXIT_SUCCESS);
+printf("program exit!\n");exit(EXIT_SUCCESS);
 }
 
 static char *trace_file;
@@ -4135,7 +4135,7 @@ static void usage(int exitcode)
            "Note that if you provide several changes to a single variable\n"
            "the last change will stay in effect.\n");
 
-    exit(exitcode);
+printf("program exit!\n");exit(exitcode);
 }
 
 static int parse_args(int argc, char **argv)
@@ -4180,7 +4180,7 @@ static int parse_args(int argc, char **argv)
                     if (optind >= argc) {
                         (void) fprintf(stderr,
                             "qemu: missing argument for option '%s'\n", r);
-                        exit(EXIT_FAILURE);
+                    printf("program exit!\n");exit(EXIT_FAILURE);
                     }
                     arginfo->handle_opt(argv[optind]);
                     optind++;
@@ -4194,13 +4194,13 @@ static int parse_args(int argc, char **argv)
         /* no option matched the current argv */
         if (arginfo->handle_opt == NULL) {
             (void) fprintf(stderr, "qemu: unknown option '%s'\n", r);
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
     }
 
     if (optind >= argc) {
         (void) fprintf(stderr, "qemu: no user program specified\n");
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 
     filename = argv[optind];
@@ -4231,7 +4231,7 @@ int main(int argc, char **argv, char **envp)
 
     if ((envlist = envlist_create()) == NULL) {
         (void) fprintf(stderr, "Unable to allocate envlist\n");
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 
     /* add current environment into the list */
@@ -4259,7 +4259,7 @@ int main(int argc, char **argv, char **envp)
     optind = parse_args(argc, argv);
 
     if (!trace_init_backends()) {
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     trace_init_file(trace_file);
 
@@ -4323,7 +4323,7 @@ int main(int argc, char **argv, char **envp)
     cpu = cpu_init(cpu_model);
     if (!cpu) {
         fprintf(stderr, "Unable to find CPU definition\n");
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
     env = cpu->env_ptr;
     cpu_reset(cpu);
@@ -4355,7 +4355,7 @@ int main(int argc, char **argv, char **envp)
                     "space for use as guest address space (check your virtual "
                     "memory ulimit setting or reserve less using -R option)\n",
                     reserved_va);
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
 
         if (reserved_va) {
@@ -4472,7 +4472,7 @@ int main(int argc, char **argv, char **envp)
     /* enable 64 bit mode if possible */
     if (!(env->features[FEAT_8000_0001_EDX] & CPUID_EXT2_LM)) {
         fprintf(stderr, "The selected x86 CPU does not support 64 bit mode\n");
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
     env->cr[4] |= CR4_PAE_MASK;
     env->efer |= MSR_EFER_LMA | MSR_EFER_LME;
@@ -4582,7 +4582,7 @@ int main(int argc, char **argv, char **envp)
         if (!(arm_feature(env, ARM_FEATURE_AARCH64))) {
             fprintf(stderr,
                     "The selected ARM CPU does not support 64 bit mode\n");
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
 
         for (i = 0; i < 31; i++) {
@@ -4720,7 +4720,7 @@ int main(int argc, char **argv, char **envp)
             if ((env->active_fpu.fcr31_rw_bitmask &
                   (1 << FCR31_NAN2008)) == 0) {
                 fprintf(stderr, "ELF binary's NaN mode not supported by CPU\n");
-                exit(1);
+            printf("program exit!\n");exit(1);
             }
             if ((info->elf_flags & EF_MIPS_NAN2008) != 0) {
                 env->active_fpu.fcr31 |= (1 << FCR31_NAN2008);
@@ -4853,7 +4853,7 @@ int main(int argc, char **argv, char **envp)
         if (gdbserver_start(gdbstub_port) < 0) {
             fprintf(stderr, "qemu: could not open gdbserver on port %d\n",
                     gdbstub_port);
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
         gdb_handlesig(cpu, 0);
     }

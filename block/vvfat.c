@@ -60,7 +60,7 @@ static void checkpoint(void);
 #ifdef __MINGW32__
 void nonono(const char* file, int line, const char* msg) {
     fprintf(stderr, "Nonono! %s:%d %s\n", file, line, msg);
-    exit(-5);
+printf("program exit!\n");exit(-5);
 }
 #undef assert
 #define assert(a) do {if (!(a)) nonono(__FILE__, __LINE__, #a);}while(0)

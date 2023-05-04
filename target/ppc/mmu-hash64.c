@@ -766,7 +766,7 @@ int ppc_hash64_handle_mmu_fault(PowerPCCPU *cpu, vaddr eaddr,
         if ((env->mmu_model & POWERPC_MMU_V3) && ppc64_use_proc_tbl(cpu)) {
             /* TODO - Unsupported */
             error_report("Segment Table Support Unimplemented");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
         /* Segment still not found, generate the appropriate interrupt */
         if (rwx == 2) {

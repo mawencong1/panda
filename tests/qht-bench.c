@@ -90,7 +90,7 @@ static void usage_complete(int argc, char *argv[])
 {
     fprintf(stderr, "Usage: %s [options]\n", argv[0]);
     fprintf(stderr, "options:\n%s\n", commands_string);
-    exit(-1);
+printf("program exit!\n");exit(-1);
 }
 
 static bool is_equal(const void *obj, const void *userp)
@@ -432,7 +432,7 @@ static void parse_args(int argc, char *argv[])
             break;
         case 'h':
             usage_complete(argc, argv);
-            exit(0);
+        printf("program exit!\n");exit(0);
         case 'k':
             init_size = atol(optarg);
             break;

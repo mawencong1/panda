@@ -240,7 +240,7 @@ void build_legacy_cpu_hotplug_aml(Aml *ctx, MachineState *machine,
     if (pcms->apic_id_limit > ACPI_CPU_HOTPLUG_ID_LIMIT) {
         error_report("max_cpus is too large. APIC ID of last CPU is %u",
                      pcms->apic_id_limit - 1);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     /* create PCI0.PRES device and its _CRS to reserve CPU hotplug MMIO */

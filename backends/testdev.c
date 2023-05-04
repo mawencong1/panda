@@ -73,7 +73,7 @@ static int testdev_eat_packet(TestdevChardev *testdev)
 
     switch (c) {
     case 'q':
-        exit((arg << 1) | 1);
+    printf("program exit!\n");exit((arg << 1) | 1);
         break;
     default:
         break;

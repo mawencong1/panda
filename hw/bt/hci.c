@@ -459,7 +459,7 @@ static inline uint8_t *bt_hci_event_start(struct bt_hci_s *hci,
     if (len > 255) {
         fprintf(stderr, "%s: HCI event params too long (%ib)\n",
                         __FUNCTION__, len);
-        exit(-1);
+    printf("program exit!\n");exit(-1);
     }
 
     mask_byte = (evt - 1) >> 3;
@@ -591,7 +591,7 @@ static void bt_hci_inquiry_result(struct bt_hci_s *hci,
     default:
         fprintf(stderr, "%s: bad inquiry mode %02x\n", __FUNCTION__,
                         hci->lm.inquiry_mode);
-        exit(-1);
+    printf("program exit!\n");exit(-1);
     }
 }
 

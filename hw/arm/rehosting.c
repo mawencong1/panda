@@ -284,7 +284,7 @@ void create_internal_gic(RehostingBoardInfo *vbi, machine_irqs *irqs, int gic_ve
 
     } else {
         error_report("Rehosting machine doesn't currently support peripheral base for %s", vbi->cpu_model);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     vbi->bootinfo.gic_cpu_if_addr = gic_cpu_addr;
@@ -343,7 +343,7 @@ void create_external_gic(RehostingBoardInfo *vbi, machine_irqs *irqs, int gic_ve
     // TODO: support GICv3 at somepoint
     if (gic_version == 3) {
         error_report("Rehosting machine doesn't currently support GICv3!");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     // Init GIC
@@ -435,19 +435,19 @@ void create_one_flash(const char *name, hwaddr flashbase,
             error_report("The contents of the first flash device may be "
                          "specified with -bios or with -drive if=pflash... "
                          "but you cannot use both options at once");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
         // Note this QEMU_FILE_TYPE_BIOS is used for fallback behavior, should not affect mounting rootfs
         fn = qemu_find_file(QEMU_FILE_TYPE_BIOS, file);
         if (!fn) {
             error_report("Could not find drive image '%s'", file);
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
         image_size = load_image_mr(fn, sysbus_mmio_get_region(sbd, 0));
         g_free(fn);
         if (image_size < 0) {
             error_report("Could not load drive image '%s'", file);
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     }
 }
@@ -561,7 +561,7 @@ static void mach_rehosting_init(MachineState *machine)
 
         if (!cpu_oc) {
             error_report("Unable to find CPU definition");
-            exit(1);
+        printf("program exit!\n");exit(1);
         } else {
             RH_DBG("Adding CPU: %s (%i of %i)", vbi->cpu_model, (n + 1), smp_cpus);
         }

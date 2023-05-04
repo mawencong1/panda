@@ -46,7 +46,7 @@ static void spapr_cpu_reset(void *opaque)
             | (spapr->htab_shift - 18);
         if (kvmppc_put_books_sregs(cpu) < 0) {
             error_report("Unable to update SDR1 in KVM");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     }
 }

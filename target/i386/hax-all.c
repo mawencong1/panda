@@ -228,7 +228,7 @@ int hax_init_vcpu(CPUState *cpu)
     ret = hax_vcpu_create(cpu->cpu_index);
     if (ret < 0) {
         fprintf(stderr, "Failed to create HAX vcpu\n");
-        exit(-1);
+    printf("program exit!\n");exit(-1);
     }
 
     cpu->hax_vcpu = hax_global.vm->vcpus[cpu->cpu_index];

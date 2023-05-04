@@ -240,7 +240,7 @@ int64_t cpu_get_icount_raw(void)
     if (cpu) {
         if (!cpu->can_do_io) {
             fprintf(stderr, "Bad icount read\n");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
         icount -= (cpu->icount_decr.u16.low + cpu->icount_extra);
     }
@@ -1005,7 +1005,7 @@ static void qemu_kvm_destroy_vcpu(CPUState *cpu)
 {
     if (kvm_destroy_vcpu(cpu) < 0) {
         error_report("kvm_destroy_vcpu failed");
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 }
 
@@ -1071,7 +1071,7 @@ static void *qemu_kvm_cpu_thread_fn(void *arg)
     r = kvm_init_vcpu(cpu);
     if (r < 0) {
         fprintf(stderr, "kvm_init_vcpu failed: %s\n", strerror(-r));
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     kvm_init_cpu_signals(cpu);
@@ -1101,7 +1101,7 @@ static void *qemu_dummy_cpu_thread_fn(void *arg)
 {
 #ifdef _WIN32
     fprintf(stderr, "qtest is not supported under Windows\n");
-    exit(1);
+printf("program exit!\n");exit(1);
 #else
     CPUState *cpu = arg;
     sigset_t waitset;
@@ -1131,7 +1131,7 @@ static void *qemu_dummy_cpu_thread_fn(void *arg)
         } while (r == -1 && (errno == EAGAIN || errno == EINTR));
         if (r == -1) {
             perror("sigwait");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
         qemu_mutex_lock_iothread();
         current_cpu = cpu;
@@ -1414,14 +1414,14 @@ static void qemu_cpu_kick_thread(CPUState *cpu)
     err = pthread_kill(cpu->thread->thread, SIG_IPI);
     if (err) {
         fprintf(stderr, "qemu:%s: %s", __func__, strerror(err));
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 #else /* _WIN32 */
     if (!qemu_cpu_is_self(cpu)) {
         if (!QueueUserAPC(dummy_apc_func, cpu->hThread, 0)) {
             fprintf(stderr, "%s: QueueUserAPC failed with error %lu\n",
                     __func__, GetLastError());
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     }
 #endif
@@ -1662,7 +1662,7 @@ gotPipeNotification(void *ctx)
     /* cpu thread asked us to run AFL forkserver */
     if(read(afl_qemuloop_pipe[0], buf, 4) != 4) {
         AFL_DPRINTF("error reading afl/qemu pipe!\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     AFL_DPRINTF("start up afl forkserver!\n");
     env = NULL; //XXX for now.. if we want to share JIT to the parent we will need to pass in a real env here
@@ -1688,7 +1688,7 @@ void qemu_init_vcpu(CPUState *cpu)
 {
     if(pipe(afl_qemuloop_pipe) == -1) {
         perror("qemuloop pipe");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     qemu_set_fd_handler(afl_qemuloop_pipe[0], gotPipeNotification, NULL, NULL);
     cpu->nr_cores = smp_cores;

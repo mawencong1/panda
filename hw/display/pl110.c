@@ -175,7 +175,7 @@ static void pl110_update_display(void *opaque)
         break;
     default:
         fprintf(stderr, "pl110: Bad color depth\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     if (s->cr & PL110_CR_BGR)
         bpp_offset = 0;

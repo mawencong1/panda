@@ -138,7 +138,7 @@ void select_soundhw(const char *optarg)
              printf("Machine has no user-selectable audio hardware "
                     "(it may or may not have always-present audio hardware).\n");
         }
-        exit(!is_help_option(optarg));
+    printf("program exit!\n");exit(!is_help_option(optarg));
     }
     else {
         size_t l;
@@ -195,13 +195,13 @@ void audio_init(void)
             if (c->isa) {
                 if (!isa_bus) {
                     error_report("ISA bus not available for %s", c->name);
-                    exit(1);
+                printf("program exit!\n");exit(1);
                 }
                 c->init.init_isa(isa_bus);
             } else {
                 if (!pci_bus) {
                     error_report("PCI bus not available for %s", c->name);
-                    exit(1);
+                printf("program exit!\n");exit(1);
                 }
                 c->init.init_pci(pci_bus);
             }

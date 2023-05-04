@@ -1049,7 +1049,7 @@ void qemu_spice_display_init(void)
         spice_con = qemu_console_lookup_by_device_name(str, head, &err);
         if (err) {
             error_report("Failed to lookup display/head");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     } else {
         spice_con = NULL;

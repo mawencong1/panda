@@ -33,7 +33,7 @@ int main(){
     int r = read(f, buf, 9728);
     if (r == -1){
         printf("Read Error %d\n", errno);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     
     label_buffer((uint64_t)buf, st.st_size);
@@ -41,7 +41,7 @@ int main(){
     r = write(f, buf, 9728);
     if (r == -1){
         printf("Write Error %d\n", errno);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     close(f);
     //memset(buf, 0, 9728); <-- Don't do this
@@ -52,7 +52,7 @@ int main(){
     r = read(f, buf, 9728);
     if (r == -1){
         printf("Read 2 Error %d\n", errno);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     query_buffer((uint64_t)buf, st.st_size);
     close(f);

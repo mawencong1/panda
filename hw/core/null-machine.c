@@ -29,7 +29,7 @@ static void machine_none_init(MachineState *mch)
         cpu = cpu_init(mch->cpu_model);
         if (!cpu) {
             error_report("Unable to initialize CPU");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     }
 

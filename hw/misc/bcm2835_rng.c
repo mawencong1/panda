@@ -31,7 +31,7 @@ static uint32_t get_random_bytes(void)
          * mid-run.
          */
         error_report_err(err);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     return res;
 }

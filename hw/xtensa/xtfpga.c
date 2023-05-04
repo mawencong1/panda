@@ -236,7 +236,7 @@ static void lx_init(const LxBoardDesc *board, MachineState *machine)
         if (cpu == NULL) {
             error_report("unable to find CPU definition '%s'",
                          cpu_model);
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
         env = &cpu->env;
 
@@ -325,7 +325,7 @@ static void lx_init(const LxBoardDesc *board, MachineState *machine)
 
             if (!fdt) {
                 error_report("could not load DTB '%s'", dtb_filename);
-                exit(EXIT_FAILURE);
+            printf("program exit!\n");exit(EXIT_FAILURE);
             }
 
             cpu_physical_memory_write(cur_lowmem, fdt, fdt_size);
@@ -338,7 +338,7 @@ static void lx_init(const LxBoardDesc *board, MachineState *machine)
             error_report("could not load DTB '%s': "
                          "FDT support is not configured in QEMU",
                          dtb_filename);
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
 #endif
         if (initrd_filename) {
@@ -353,7 +353,7 @@ static void lx_init(const LxBoardDesc *board, MachineState *machine)
             }
             if (initrd_size < 0) {
                 error_report("could not load initrd '%s'", initrd_filename);
-                exit(EXIT_FAILURE);
+            printf("program exit!\n");exit(EXIT_FAILURE);
             }
             initrd_location.start = tswap32(cur_lowmem);
             initrd_location.end = tswap32(cur_lowmem + initrd_size);
@@ -380,7 +380,7 @@ static void lx_init(const LxBoardDesc *board, MachineState *machine)
             } else {
                 error_report("could not load kernel '%s'",
                              kernel_filename);
-                exit(EXIT_FAILURE);
+            printf("program exit!\n");exit(EXIT_FAILURE);
             }
         }
         if (entry_point != env->pc) {

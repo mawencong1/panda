@@ -2012,7 +2012,7 @@ static void vtd_iommu_notify_flag_changed(MemoryRegion *iommu,
                      "intel-iommu emulation",
                      vtd_as->bus->qbus.name, PCI_SLOT(vtd_as->devfn),
                      PCI_FUNC(vtd_as->devfn));
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 }
 

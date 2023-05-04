@@ -189,14 +189,14 @@ static void bamboo_init(MachineState *machine)
     cpu = cpu_ppc_init(machine->cpu_model);
     if (cpu == NULL) {
         fprintf(stderr, "Unable to initialize CPU!\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     env = &cpu->env;
 
     if (env->mmu_model != POWERPC_MMU_BOOKE) {
         fprintf(stderr, "MMU model %i not supported by this machine.\n",
             env->mmu_model);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     qemu_register_reset(main_cpu_reset, cpu);
@@ -229,7 +229,7 @@ static void bamboo_init(MachineState *machine)
     pcibus = (PCIBus *)qdev_get_child_bus(dev, "pci.0");
     if (!pcibus) {
         fprintf(stderr, "couldn't create PCI controller!\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     memory_region_init_alias(isa, NULL, "isa_mmio",
@@ -271,7 +271,7 @@ static void bamboo_init(MachineState *machine)
         if (success < 0) {
             fprintf(stderr, "qemu: could not load kernel '%s'\n",
                     kernel_filename);
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     }
 
@@ -283,7 +283,7 @@ static void bamboo_init(MachineState *machine)
         if (initrd_size < 0) {
             fprintf(stderr, "qemu: could not load ram disk '%s' at %x\n",
                     initrd_filename, RAMDISK_ADDR);
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     }
 
@@ -292,7 +292,7 @@ static void bamboo_init(MachineState *machine)
         if (bamboo_load_device_tree(FDT_ADDR, ram_size, RAMDISK_ADDR,
                                     initrd_size, kernel_cmdline) < 0) {
             fprintf(stderr, "couldn't load device tree\n");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     }
 }

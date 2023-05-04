@@ -94,7 +94,7 @@ static void add_rom_or_fail(const char *file, const hwaddr addr)
      */
     if (!qtest_enabled() && rom_add_file_fixed(file, addr, -1)) {
         error_report("Unable to load a firmware for -M niagara");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
 }
@@ -155,7 +155,7 @@ static void niagara_init(MachineState *machine)
         } else {
             fprintf(stderr, "qemu: could not load ram disk '%s'\n",
                     blk_bs(blk)->filename);
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     }
     if (serial_hds[0]) {

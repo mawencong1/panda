@@ -105,7 +105,7 @@ static QDict * load_configuration(const char * filename)
     {
         fprintf(stderr, "%ld\n", filesize);
         fprintf(stderr, "Out of memory\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     ret = read(file, filedata, filesize);
@@ -113,7 +113,7 @@ static QDict * load_configuration(const char * filename)
     if (ret != filesize)
     {
         fprintf(stderr, "Reading configuration file failed\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     close(file);
@@ -122,7 +122,7 @@ static QDict * load_configuration(const char * filename)
     if (!obj || qobject_type(obj) != QTYPE_QDICT)
     {
         fprintf(stderr, "Error parsing JSON configuration file\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     g_free(filedata);
@@ -489,7 +489,7 @@ static THISCPU *create_cpu(MachineState * ms, QDict *conf)
     cpu_oc = cpu_class_by_name(TYPE_ARM_CPU, cpu_model);
     if (!cpu_oc) {
         fprintf(stderr, "Unable to find CPU definition\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     cpuobj = object_new(object_class_get_name(cpu_oc));
@@ -507,7 +507,7 @@ static THISCPU *create_cpu(MachineState * ms, QDict *conf)
     cpu_oc = cpu_class_by_name(TYPE_X86_CPU, cpu_model);
     if (!cpu_oc) {
         fprintf(stderr, "Unable to find CPU definition\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     cpuobj = object_new(object_class_get_name(cpu_oc));
 
@@ -540,7 +540,7 @@ static THISCPU *create_cpu(MachineState * ms, QDict *conf)
     env = (CPUState *) &(cpuu->env);
     if (!env) {
         fprintf(stderr, "Unable to find CPU definition\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
 #if defined(TARGET_ARM)

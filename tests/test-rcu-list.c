@@ -65,7 +65,7 @@ static void create_thread(void *(*func)(void *))
 {
     if (n_threads >= NR_THREADS) {
         fprintf(stderr, "Thread limit of %d exceeded!\n", NR_THREADS);
-        exit(-1);
+    printf("program exit!\n");exit(-1);
     }
     qemu_thread_create(&threads[n_threads], "test", func, &data[n_threads],
                        QEMU_THREAD_JOINABLE);
@@ -249,14 +249,14 @@ static void rcu_qtest(const char *test, int duration, int nreaders)
         printf("%s: %d readers; 1 updater; nodes read: "  \
                "%lld, nodes removed: %lld; nodes reclaimed: %lld\n",
                test, nthreadsrunning - 1, n_reads, n_nodes_removed, n_reclaims);
-        exit(0);
+    printf("program exit!\n");exit(0);
     }
 }
 
 static void usage(int argc, char *argv[])
 {
     fprintf(stderr, "Usage: %s duration nreaders\n", argv[0]);
-    exit(-1);
+printf("program exit!\n");exit(-1);
 }
 
 static int gtest_seconds;

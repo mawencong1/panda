@@ -193,7 +193,7 @@ void do_m68k_semihosting(CPUM68KState *env, int nr)
     switch (nr) {
     case HOSTED_EXIT:
         gdb_exit(env, env->dregs[0]);
-        exit(env->dregs[0]);
+    printf("program exit!\n");exit(env->dregs[0]);
     case HOSTED_OPEN:
         GET_ARG(0);
         GET_ARG(1);

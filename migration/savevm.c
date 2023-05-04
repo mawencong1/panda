@@ -1541,7 +1541,7 @@ static void *postcopy_ram_listen_thread(void *opaque)
          * to leave the guest running and fire MCEs for pages that never
          * arrived as a desperate recovery step.
          */
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 
     migrate_set_state(&mis->state, MIGRATION_STATUS_POSTCOPY_ACTIVE,

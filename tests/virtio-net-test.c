@@ -64,7 +64,7 @@ static QOSState *pci_test_start(int socket)
         return qtest_spapr_boot(cmd, socket);
     }
     g_printerr("virtio-net tests are only available on x86 or ppc64\n");
-    exit(EXIT_FAILURE);
+printf("program exit!\n");exit(EXIT_FAILURE);
 }
 
 static void driver_init(QVirtioDevice *dev)

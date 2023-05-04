@@ -600,7 +600,7 @@ static void integratorcp_init(MachineState *machine)
     cpu_oc = cpu_class_by_name(TYPE_ARM_CPU, cpustr[0]);
     if (!cpu_oc) {
         fprintf(stderr, "Unable to find CPU definition\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     typename = object_class_get_name(cpu_oc);
 
@@ -609,7 +609,7 @@ static void integratorcp_init(MachineState *machine)
     g_strfreev(cpustr);
     if (err) {
         error_report_err(err);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     cpuobj = object_new(typename);

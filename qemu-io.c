@@ -490,7 +490,7 @@ int main(int argc, char **argv)
         case 'd':
             if (bdrv_parse_discard_flags(optarg, &flags) < 0) {
                 error_report("Invalid discard option: %s", optarg);
-                exit(1);
+            printf("program exit!\n");exit(1);
             }
             break;
         case 'f':
@@ -511,7 +511,7 @@ int main(int argc, char **argv)
         case 't':
             if (bdrv_parse_cache_mode(optarg, &flags, &writethrough) < 0) {
                 error_report("Invalid cache option: %s", optarg);
-                exit(1);
+            printf("program exit!\n");exit(1);
             }
             break;
         case 'T':
@@ -520,16 +520,16 @@ int main(int argc, char **argv)
             break;
         case 'V':
             printf("%s version %s\n", progname, QEMU_VERSION);
-            exit(0);
+        printf("program exit!\n");exit(0);
         case 'h':
             usage(progname);
-            exit(0);
+        printf("program exit!\n");exit(0);
         case OPTION_OBJECT: {
             QemuOpts *qopts;
             qopts = qemu_opts_parse_noisily(&qemu_object_opts,
                                             optarg, true);
             if (!qopts) {
-                exit(1);
+            printf("program exit!\n");exit(1);
             }
         }   break;
         case OPTION_IMAGE_OPTS:
@@ -537,33 +537,33 @@ int main(int argc, char **argv)
             break;
         default:
             usage(progname);
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     }
 
     if ((argc - optind) > 1) {
         usage(progname);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     if (format && imageOpts) {
         error_report("--image-opts and -f are mutually exclusive");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     if (qemu_init_main_loop(&local_error)) {
         error_report_err(local_error);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     if (qemu_opts_foreach(&qemu_object_opts,
                           user_creatable_add_opts_foreach,
                           NULL, NULL)) {
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     if (!trace_init_backends()) {
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     trace_init_file(trace_file);
     qemu_set_log(LOG_TRACE);
@@ -592,11 +592,11 @@ int main(int argc, char **argv)
             QemuOpts *qopts = NULL;
             qopts = qemu_opts_parse_noisily(&file_opts, argv[optind], false);
             if (!qopts) {
-                exit(1);
+            printf("program exit!\n");exit(1);
             }
             opts = qemu_opts_to_qdict(qopts, NULL);
             if (openfile(NULL, flags, writethrough, opts)) {
-                exit(1);
+            printf("program exit!\n");exit(1);
             }
         } else {
             if (format) {
@@ -604,7 +604,7 @@ int main(int argc, char **argv)
                 qdict_put_str(opts, "driver", format);
             }
             if (openfile(argv[optind], flags, writethrough, opts)) {
-                exit(1);
+            printf("program exit!\n");exit(1);
             }
         }
     }

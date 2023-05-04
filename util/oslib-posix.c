@@ -454,7 +454,7 @@ void os_mem_prealloc(int fd, char *area, size_t memory, int smp_cpus,
     if (ret) {
         /* Terminate QEMU since it can't recover from error */
         perror("os_mem_prealloc: failed to reinstall signal handler");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 }
 

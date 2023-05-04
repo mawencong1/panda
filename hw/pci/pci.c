@@ -893,7 +893,7 @@ static uint16_t pci_req_id_cache_extract(PCIReqIDCache *cache)
     default:
         error_printf("Invalid PCI requester ID cache type: %d\n",
                      cache->type);
-        exit(1);
+    printf("program exit!\n");exit(1);
         break;
     }
 
@@ -1100,7 +1100,7 @@ void pci_register_bar(PCIDevice *pci_dev, int region_num,
     if (size & (size-1)) {
         fprintf(stderr, "ERROR: PCI region size must be pow2 "
                     "type=0x%x, size=0x%"FMT_PCIBUS"\n", type, size);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     r = &pci_dev->io_regions[region_num];
@@ -1829,19 +1829,19 @@ PCIDevice *pci_nic_init_nofail(NICInfo *nd, PCIBus *rootbus,
     int i;
 
     if (qemu_show_nic_models(nd->model, pci_nic_models)) {
-        exit(0);
+    printf("program exit!\n");exit(0);
     }
 
     i = qemu_find_nic_model(nd, pci_nic_models, default_model);
     if (i < 0) {
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     bus = pci_get_bus_devfn(&devfn, rootbus, devaddr);
     if (!bus) {
         error_report("Invalid PCI device address %s for device %s",
                      devaddr, pci_nic_names[i]);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     pci_dev = pci_create(bus, devfn, pci_nic_names[i]);

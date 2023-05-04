@@ -71,7 +71,7 @@ static void
 vubr_die(const char *s)
 {
     perror(s);
-    exit(1);
+printf("program exit!\n");exit(1);
 }
 
 static int
@@ -548,14 +548,14 @@ vubr_set_host(struct sockaddr_in *saddr, const char *host)
     if (isdigit(host[0])) {
         if (!inet_aton(host, &saddr->sin_addr)) {
             fprintf(stderr, "inet_aton() failed.\n");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     } else {
         struct hostent *he = gethostbyname(host);
 
         if (!he) {
             fprintf(stderr, "gethostbyname() failed.\n");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
         saddr->sin_addr = *(struct in_addr *)he->h_addr;
     }
@@ -576,13 +576,13 @@ vubr_backend_udp_setup(VubrDev *dev,
     lport = strtol(local_port, (char **)&r, 0);
     if (r == local_port) {
         fprintf(stderr, "lport parsing failed.\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     rport = strtol(remote_port, (char **)&r, 0);
     if (r == remote_port) {
         fprintf(stderr, "rport parsing failed.\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     struct sockaddr_in si_local = {

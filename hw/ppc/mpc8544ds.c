@@ -43,7 +43,7 @@ static void mpc8544ds_init(MachineState *machine)
 
     if (machine->ram_size > 0xc0000000) {
         error_report("The MPC8544DS board only supports up to 3GB of RAM");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     ppce500_init(machine, &params);

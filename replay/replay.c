@@ -227,7 +227,7 @@ static void replay_enable(const char *fname, int mode)
         break;
     default:
         fprintf(stderr, "Replay: internal error: invalid replay mode\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     atexit(replay_finish);
@@ -237,7 +237,7 @@ static void replay_enable(const char *fname, int mode)
     replay_file = fopen(fname, fmode);
     if (replay_file == NULL) {
         fprintf(stderr, "Replay: open %s: %s\n", fname, strerror(errno));
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     replay_filename = g_strdup(fname);
@@ -255,7 +255,7 @@ static void replay_enable(const char *fname, int mode)
         unsigned int version = replay_get_dword();
         if (version != REPLAY_VERSION) {
             fprintf(stderr, "Replay: invalid input log file version\n");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
         /* go to the beginning */
         fseek(replay_file, HEADER_SIZE, SEEK_SET);
@@ -289,13 +289,13 @@ void replay_configure(QemuOpts *opts)
         mode = REPLAY_MODE_PLAY;
     } else {
         error_report("Invalid icount rr option: %s", rr);
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     fname = qemu_opt_get(opts, "rrfile");
     if (!fname) {
         error_report("File name not specified for replay");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     replay_snapshot = g_strdup(qemu_opt_get(opts, "rrsnapshot"));
@@ -314,11 +314,11 @@ void replay_start(void)
 
     if (replay_blockers) {
         error_reportf_err(replay_blockers->data, "Record/replay: ");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     if (!use_icount) {
         error_report("Please enable icount to use record/replay");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     /* Timer for snapshotting will be set up here. */

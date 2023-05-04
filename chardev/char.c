@@ -305,7 +305,7 @@ int qemu_chr_fe_get_msgfd(CharBackend *be)
     if (s && qemu_chr_replay(s)) {
         error_report("Replay: get msgfd is not supported "
                      "for serial devices yet");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     return res;
 }
@@ -901,7 +901,7 @@ Chardev *qemu_chr_new_from_opts(QemuOpts *opts,
 
         error_report("Available chardev backend types: %s", str->str);
         g_string_free(str, true);
-        exit(0);
+    printf("program exit!\n");exit(0);
     }
 
     if (id == NULL) {

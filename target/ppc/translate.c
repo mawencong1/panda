@@ -7381,7 +7381,7 @@ void gen_intermediate_code(CPUPPCState *env, struct TranslationBlock *tb)
             fprintf(stderr, "Opcode %02x %02x %02x %02x (%08x) leaked "
                     "temporaries\n", opc1(ctx.opcode), opc2(ctx.opcode),
                     opc3(ctx.opcode), opc4(ctx.opcode), ctx.opcode);
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     }
     if (tb->cflags & CF_LAST_IO)

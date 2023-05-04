@@ -60,7 +60,7 @@ static void replay_run_event(Event *event)
     default:
         error_report("Replay: invalid async event ID (%d) in the queue",
                     event->event_kind);
-        exit(1);
+    printf("program exit!\n");exit(1);
         break;
     }
 }
@@ -197,7 +197,7 @@ static void replay_save_event(Event *event, int checkpoint)
             break;
         default:
             error_report("Unknown ID %" PRId64 " of replay event", event->id);
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     }
 }
@@ -265,7 +265,7 @@ static Event *replay_read_event(int checkpoint)
         return event;
     default:
         error_report("Unknown ID %d of replay event", read_event_kind);
-        exit(1);
+    printf("program exit!\n");exit(1);
         break;
     }
 

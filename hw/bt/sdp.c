@@ -628,7 +628,7 @@ static int sdp_attr_max_size(struct sdp_def_data_element_s *element,
     }
 
     if (type != SDP_DTYPE_SEQ)
-        exit(-1);
+    printf("program exit!\n");exit(-1);
     len = 2;
     element = element->value.list;
     while (element->type)

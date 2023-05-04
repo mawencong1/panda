@@ -92,7 +92,7 @@ static void sdl_update(DisplayChangeListener *dcl,
         } else {
             if (sdl_zoom_blit(guest_screen, real_screen, SMOOTHING_ON, &rec) < 0) {
                 fprintf(stderr, "Zoom blit failed\n");
-                exit(1);
+            printf("program exit!\n");exit(1);
             }
         }
     } 
@@ -122,7 +122,7 @@ static void do_sdl_resize(int width, int height, int bpp)
         if (!tmp_screen) {
             fprintf(stderr, "Could not open SDL display (%dx%dx%d): %s\n",
                     width, height, bpp, SDL_GetError());
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     } else {
         /*
@@ -960,7 +960,7 @@ void sdl_display_init(DisplayState *ds, int full_screen, int no_frame)
     if(keyboard_layout) {
         kbd_layout = init_keyboard_layout(name2keysym, keyboard_layout);
         if (!kbd_layout)
-            exit(1);
+        printf("program exit!\n");exit(1);
     }
 
     if (no_frame)
@@ -990,7 +990,7 @@ void sdl_display_init(DisplayState *ds, int full_screen, int no_frame)
     if (SDL_Init (flags)) {
         fprintf(stderr, "Could not initialize SDL(%s) - exiting\n",
                 SDL_GetError());
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     vi = SDL_GetVideoInfo();
     host_format = *(vi->vfmt);

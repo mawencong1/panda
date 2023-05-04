@@ -157,7 +157,7 @@ void replay_fetch_data_kind(void)
             if (replay_state.data_kind >= EVENT_COUNT) {
                 error_report("Replay: unknown event kind %d",
                              replay_state.data_kind);
-                exit(1);
+            printf("program exit!\n");exit(1);
             }
         }
     }

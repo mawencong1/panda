@@ -97,7 +97,7 @@ int main(int argc, char **argv)
     } else {
         g_printerr("usb-hcd-uhci-test tests are only "
                    "available on x86 or ppc64\n");
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
     ret = g_test_run();
     qtest_shutdown(qs);

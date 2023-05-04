@@ -336,7 +336,7 @@ static void error_on_sysbus_device(SysBusDevice *sbdev, void *opaque)
 {
     error_report("Option '-device %s' cannot be handled by this machine",
                  object_class_get_name(object_get_class(OBJECT(sbdev))));
-    exit(1);
+printf("program exit!\n");exit(1);
 }
 
 static void machine_init_notify(Notifier *notifier, void *data)

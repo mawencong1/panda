@@ -1205,7 +1205,7 @@ again:
             break;
         default:
             BADF("Unimplemented phase %d\n", s->sstat1 & PHASE_MASK);
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
         s->dfifo = s->dbc & 0xff;
         s->ctest5 = (s->ctest5 & 0xfc) | ((s->dbc >> 8) & 3);
@@ -1276,7 +1276,7 @@ again:
                 }
                 if (insn & (1 << 9)) {
                     BADF("Target mode not implemented\n");
-                    exit(1);
+                printf("program exit!\n");exit(1);
                 }
                 if (insn & (1 << 10))
                     s->carry = 1;

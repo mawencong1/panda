@@ -252,7 +252,7 @@ void helper_do_semihosting(CPUMIPSState *env)
     switch (op) {
     case UHI_exit:
         qemu_log("UHI(%d): exit(%d)\n", op, (int)gpr[4]);
-        exit(gpr[4]);
+    printf("program exit!\n");exit(gpr[4]);
     case UHI_open:
         GET_TARGET_STRING(p, gpr[4]);
         if (!strcmp("/dev/stdin", p)) {

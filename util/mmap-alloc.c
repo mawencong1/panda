@@ -53,7 +53,7 @@ size_t qemu_mempath_getpagesize(const char *mem_path)
     if (ret != 0) {
         fprintf(stderr, "Couldn't statfs() memory path: %s\n",
                 strerror(errno));
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     if (fs.f_type == HUGETLBFS_MAGIC) {

@@ -148,7 +148,7 @@ static void mainstone_common_init(MemoryRegion *address_space_mem,
             }
             fprintf(stderr, "Two flash images must be given with the "
                     "'pflash' parameter\n");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
 
         if (!pflash_cfi01_register(mainstone_flash_base[i], NULL,
@@ -158,7 +158,7 @@ static void mainstone_common_init(MemoryRegion *address_space_mem,
                                    sector_len, MAINSTONE_FLASH / sector_len,
                                    4, 0, 0, 0, 0, be)) {
             fprintf(stderr, "qemu: Error registering flash memory.\n");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
     }
 

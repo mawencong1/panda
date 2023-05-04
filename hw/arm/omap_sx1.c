@@ -196,7 +196,7 @@ static void sx1_init(MachineState *machine, const int version)
 
     if (!machine->kernel_filename && !fl_idx && !qtest_enabled()) {
         fprintf(stderr, "Kernel or Flash image must be specified\n");
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
 
     /* Load the kernel.  */

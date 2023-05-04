@@ -85,7 +85,7 @@ static void QEMU_NORETURN GCC_FMT_ATTR(1, 2) error_exit(const char *fmt, ...)
     va_end(ap);
 
     error_printf("\nTry 'qemu-img --help' for more information\n");
-    exit(EXIT_FAILURE);
+printf("program exit!\n");exit(EXIT_FAILURE);
 }
 
 static void QEMU_NORETURN missing_argument(const char *option)
@@ -194,7 +194,7 @@ static void QEMU_NORETURN help(void)
     printf("%s\nSupported formats:", help_msg);
     bdrv_iterate_format(format_print, NULL);
     printf("\n");
-    exit(EXIT_SUCCESS);
+printf("program exit!\n");exit(EXIT_SUCCESS);
 }
 
 static QemuOptsList qemu_object_opts = {
@@ -2623,7 +2623,7 @@ static void dump_map_entry(OutputFormat output_format, MapEntry *e,
     case OFORMAT_HUMAN:
         if (e->data && !e->has_offset) {
             error_report("File contains external, encrypted or compressed clusters.");
-            exit(1);
+        printf("program exit!\n");exit(1);
         }
         if (e->data && !e->zero) {
             printf("%#-16"PRIx64"%#-16"PRIx64"%#-16"PRIx64"%s\n",
@@ -3714,7 +3714,7 @@ static void bench_undrained_flush_cb(void *opaque, int ret)
 {
     if (ret < 0) {
         error_report("Failed flush request: %s", strerror(-ret));
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 }
 
@@ -3725,7 +3725,7 @@ static void bench_cb(void *opaque, int ret)
 
     if (ret < 0) {
         error_report("Failed request: %s", strerror(-ret));
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 
     if (b->in_flush) {
@@ -3753,7 +3753,7 @@ static void bench_cb(void *opaque, int ret)
                 acb = blk_aio_flush(b->blk, cb, b);
                 if (!acb) {
                     error_report("Failed to issue flush request");
-                    exit(EXIT_FAILURE);
+                printf("program exit!\n");exit(EXIT_FAILURE);
                 }
             }
             if (b->drain_on_flush) {
@@ -3778,7 +3778,7 @@ static void bench_cb(void *opaque, int ret)
         }
         if (!acb) {
             error_report("Failed to issue request");
-            exit(EXIT_FAILURE);
+        printf("program exit!\n");exit(EXIT_FAILURE);
         }
     }
 }
@@ -4384,7 +4384,7 @@ int main(int argc, char **argv)
 
     if (qemu_init_main_loop(&local_error)) {
         error_report_err(local_error);
-        exit(EXIT_FAILURE);
+    printf("program exit!\n");exit(EXIT_FAILURE);
     }
 
     qcrypto_init(&error_fatal);
@@ -4431,7 +4431,7 @@ int main(int argc, char **argv)
     optind = 0;
 
     if (!trace_init_backends()) {
-        exit(1);
+    printf("program exit!\n");exit(1);
     }
     trace_init_file(trace_file);
     qemu_set_log(LOG_TRACE);

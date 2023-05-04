@@ -66,12 +66,12 @@ void replay_vmstate_init(void)
         if (replay_mode == REPLAY_MODE_RECORD) {
             if (save_vmstate(cur_mon, replay_snapshot) != 0) {
                 error_report("Could not create snapshot for icount record");
-                exit(1);
+            printf("program exit!\n");exit(1);
             }
         } else if (replay_mode == REPLAY_MODE_PLAY) {
             if (load_vmstate(replay_snapshot) != 0) {
                 error_report("Could not load snapshot for icount replay");
-                exit(1);
+            printf("program exit!\n");exit(1);
             }
         }
     }
